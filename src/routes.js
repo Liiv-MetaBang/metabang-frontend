@@ -4,6 +4,7 @@ import Login from './views/user/Login.vue'
 import Join from './views/user/Join.vue'
 import FeedMain from './views/feed/IndexFeed.vue'
 import Components from './views/Components.vue'
+import Checklist from './views/contract/Checklist.vue'
 
 export default [
 
@@ -27,5 +28,10 @@ export default [
         path : '/components',
         name : 'Components',
         component : Components
-    }
+    },
+    {
+        path: '/checklist',
+        name: 'Checklist',
+        component: Checklist
+    },
 ]
