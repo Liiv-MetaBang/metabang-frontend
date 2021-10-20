@@ -4,6 +4,7 @@ import Login from './views/user/Login.vue'
 import Join from './views/user/Join.vue'
 import FeedMain from './views/feed/IndexFeed.vue'
 import Components from './views/Components.vue'
+import RealestateSearch from './views/realestate/Search.vue'
 
 export default [
 
@@ -27,5 +28,10 @@ export default [
         path : '/components',
         name : 'Components',
         component : Components
+    },
+    {
+        path : '/realestate/search',
+        name : 'RealestateSearch',
+        component : RealestateSearch
     }
 ]
