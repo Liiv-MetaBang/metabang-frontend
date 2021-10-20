@@ -8,6 +8,7 @@ import RealestateSearch from './views/realestate/Search.vue'
 import Checklist from './views/contract/Checklist.vue'
 import Test from './components/HelloWorld.vue'
 import Reservation from './views/contract/Reservation.vue'
+import Contract from './views/contract/Contract.vue'
 
 export default [
 
@@ -52,4 +53,9 @@ export default [
         name: 'Reservation',
         component: Reservation
     },
+    {
+        path: '/contract',
+        name:'Contract',
+        component: Contract
+    }
 ]
