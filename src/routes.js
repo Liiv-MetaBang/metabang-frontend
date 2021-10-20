@@ -47,6 +47,7 @@ export default [
         name: 'Test',
         component: Test
     },
+    {
         path: '/reservation',
         name: 'Reservation',
         component: Reservation
