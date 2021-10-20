@@ -6,6 +6,7 @@ import FeedMain from './views/feed/IndexFeed.vue'
 import Components from './views/Components.vue'
 import RealestateSearch from './views/realestate/Search.vue'
 import Checklist from './views/contract/Checklist.vue'
+import Test from './components/HelloWorld.vue'
 import Reservation from './views/contract/Reservation.vue'
 
 export default [
@@ -42,9 +43,12 @@ export default [
         component: Checklist
     },
     {
+        path: '/test',
+        name: 'Test',
+        component: Test
+    },
         path: '/reservation',
         name: 'Reservation',
         component: Reservation
     },
-
 ]
