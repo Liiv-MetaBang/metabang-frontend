@@ -6,7 +6,7 @@
             <i class="fas fa-chevron-left"></i>
         </button>
 
-        <h4 class="title">
+        <h4 class="title" >
             {{headerTitle}}
         </h4>
 
@@ -26,3 +26,12 @@
         props : ['headerTitle', 'isBack', 'isSearch', 'rightText', 'isDisabled'],
     }
 </script>
+
+<style>
+@font-face {
+    font-family: 'NEXON Lv1 Gothic OTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+</style>
