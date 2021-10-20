@@ -5,6 +5,7 @@ import Join from './views/user/Join.vue'
 import FeedMain from './views/feed/IndexFeed.vue'
 import Components from './views/Components.vue'
 import Checklist from './views/contract/Checklist.vue'
+import Reservation from './views/contract/Reservation.vue'
 
 export default [
 
@@ -33,5 +34,10 @@ export default [
         path: '/checklist',
         name: 'Checklist',
         component: Checklist
+    },
+    {
+        path: '/reservation',
+        name: 'Reservation',
+        component: Reservation
     },
 ]
