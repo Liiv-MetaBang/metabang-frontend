@@ -5,15 +5,18 @@
                 전세자금대출
             </div>
             <div class="content">
-                <LoanList />
+                <Progress />
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import Progress from "../../components/deal/Progress.vue"
 export default {
-
+    components: {
+        Progress,
+    }
 }
 </script>
 
@@ -23,6 +26,8 @@ export default {
 }
 .procedure {
     height: 100vh;
+    background-color: #F8F6E7;
+
 }
 #procedure .title {
     height: 8vh;
