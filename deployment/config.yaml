@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: front-config
 data:
-  SERVLET_CONTEXT_PATH: "/front"
+  SERVLET_CONTEXT_PATH: "/"
 # MYSQL DB
   DB_SERVER: mysql.dkne
   DB_PORT: "3306"
