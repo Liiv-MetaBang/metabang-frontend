@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: front
+  labels:
+    app: front
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: front
+  template:
+    metadata:
+      labels:
+        app: front
+    spec:
+      containers:
+      - name: front
+        image: namdk1028/front:dev
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        env:
+        - name: DB_SERVER
+          valueFrom:
+            configMapKeyRef:
+              name: front-config
+              key: DB_SERVER
+        - name: DB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: front-config
+              key: DB_PORT
+        - name: DB_USERNAME
+          valueFrom:
+            configMapKeyRef:
+              name: front-config
+              key: DB_USERNAME
+        - name: DB_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              name: front-config
+              key: DB_PASSWORD
+        - name: SERVLET_CONTEXT_PATH
+          valueFrom:
+            configMapKeyRef:
+              name: front-config
+              key: SERVLET_CONTEXT_PATH
