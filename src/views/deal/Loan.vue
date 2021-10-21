@@ -34,16 +34,16 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: red;
+    background-color: gainsboro;
 }
 #loan .content {
     height: 92vh;
     padding: 20px;
+    overflow: scroll;
 }
 @media screen and (min-width: 900px) {
   .loan {
     max-width: 580px;
-    background-color: gainsboro;
     margin: auto;
   }
 }
