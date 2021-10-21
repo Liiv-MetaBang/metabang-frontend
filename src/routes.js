@@ -1,5 +1,3 @@
-
-
 import Login from './views/user/Login.vue'
 import Join from './views/user/Join.vue'
 import FeedMain from './views/feed/IndexFeed.vue'
@@ -8,6 +6,7 @@ import RealestateSearch from './views/realestate/Search.vue'
 import Checklist from './views/contract/Checklist.vue'
 import Test from './components/HelloWorld.vue'
 import Reservation from './views/contract/Reservation.vue'
+import Loan from './views/deal/Loan.vue'
 
 export default [
 
@@ -51,5 +50,10 @@ export default [
         path: '/reservation',
         name: 'Reservation',
         component: Reservation
+    },
+    {
+        path: '/loan',
+        name: 'Loan',
+        component: Loan
     },
 ]
