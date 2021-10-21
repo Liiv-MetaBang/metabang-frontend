@@ -11,7 +11,6 @@
                 >
                     {{ list.bank }}
                 </v-chip>
-
             </div>
             <v-divider></v-divider>
             <div class='loan-content'>
@@ -56,7 +55,7 @@
             </div>
             <div class="loan-footer">
                 <v-btn class="loan-btn" color="orange lighten-2" dark :href="list.url">자세히 보기</v-btn>
-                <v-btn class="loan-btn" color="brown lighten-1" dark>대출 받기</v-btn>
+                <v-btn class="loan-btn" color="brown lighten-1" dark @click="$router.push('/loan/procedure')">대출 받기</v-btn>
             </div>
         </v-card>
     </div>

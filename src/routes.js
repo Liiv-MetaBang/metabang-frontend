@@ -7,6 +7,7 @@ import Checklist from './views/contract/Checklist.vue'
 import Test from './components/HelloWorld.vue'
 import Reservation from './views/contract/Reservation.vue'
 import Loan from './views/deal/Loan.vue'
+import Procedure from "./views/deal/Procedure.vue"
 
 export default [
 
@@ -56,4 +57,9 @@ export default [
         name: 'Loan',
         component: Loan
     },
+    {
+        path: "/loan/procedure",
+        name: "Procedure",
+        component: Procedure
+    }
 ]
