@@ -140,6 +140,7 @@
 
 <script>
 export default {
+  name: "Certification",
   data() {
     return {
       dialog: true,
