@@ -8,6 +8,7 @@ import Test from './components/HelloWorld.vue'
 import Reservation from './views/contract/Reservation.vue'
 import Loan from './views/deal/Loan.vue'
 import Procedure from "./views/deal/Procedure.vue"
+import Contract from './views/contract/Contract.vue'
 
 export default [
 
@@ -61,5 +62,10 @@ export default [
         path: "/loan/procedure",
         name: "Procedure",
         component: Procedure
+    },
+    {
+        path: '/contract',
+        name:'Contract',
+        component: Contract
     }
 ]
