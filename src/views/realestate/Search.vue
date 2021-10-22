@@ -33,7 +33,7 @@
           </div>
         </v-row>
         <div>
-          <v-btn class="ma-2" outlined fab color="indigo">
+          <v-btn class="ma-2" outlined fab color="indigo" @click="fetchList()">
             검색
           </v-btn>
         </div>
@@ -45,6 +45,8 @@
 </template>
 
 <script>
+import rest from "../../api/httpCommon.js";
+
 export default {
   name: "RealestateSearch",
   components: {},
@@ -110,6 +112,20 @@ export default {
     }
   },
   methods: {
+    fetchList() {
+      rest
+        .axios({
+          url: "house/v1/list",
+          method: "get",
+        })
+        .then((res) => {
+          console.log(res);
+          console.log("데이터 가져오기");
+        })
+        .catch(() => {
+          // 통신 실패
+        });
+    },
     initMap() {
       const container = document.getElementById("map");
       const options = {
@@ -117,6 +133,40 @@ export default {
         level: 7,
       };
       this.map = new kakao.maps.Map(container, options);
+      this.setMarker();
+    },
+    setMarker() {
+      const imageSrc =
+          "https://cdn-icons-png.flaticon.com/512/5884/5884978.png",
+        imageSize = new kakao.maps.Size(50, 50),
+        imageOption = { offset: new kakao.maps.Point(25, 45) };
+
+      const markerImage = new kakao.maps.MarkerImage(
+        imageSrc,
+        imageSize,
+        imageOption
+      );
+
+      const markerPositions = [
+        {
+          title: "역",
+          latlng: new kakao.maps.LatLng(37.51924223760834, 126.92716681223602),
+        },
+        {
+          title: "TEMP",
+          latlng: new kakao.maps.LatLng(37.513302984780985, 126.9263813267745),
+        },
+      ];
+
+      for (var i = 0; i < markerPositions.length; i++) {
+        // 마커를 생성합니다
+        new kakao.maps.Marker({
+          map: this.map, // 마커를 표시할 지도
+          position: markerPositions[i].latlng, // 마커를 표시할 위치
+          title: markerPositions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+          image: markerImage, // 마커 이미지
+        });
+      }
     },
   },
 };
