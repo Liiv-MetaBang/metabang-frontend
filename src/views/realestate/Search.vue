@@ -115,12 +115,11 @@ export default {
     fetchList() {
       houserest
         .axios({
-          url: "/hello",
+          url: "",
           method: "get",
         })
         .then((res) => {
-          console.log(res);
-          console.log("데이터 가져오기");
+          this.setMarker(res.data);
         })
         .catch(() => {
           // 통신 실패
@@ -129,13 +128,13 @@ export default {
     initMap() {
       const container = document.getElementById("map");
       const options = {
-        center: new kakao.maps.LatLng(37.51924223760834, 126.92716681223602),
-        level: 7,
+        center: new kakao.maps.LatLng(37.49721718198739, 126.9158540688247),
+        level: 4,
       };
       this.map = new kakao.maps.Map(container, options);
-      this.setMarker();
     },
-    setMarker() {
+    setMarker(data) {
+
       const imageSrc =
           "https://cdn-icons-png.flaticon.com/512/5884/5884978.png",
         imageSize = new kakao.maps.Size(50, 50),
@@ -147,23 +146,13 @@ export default {
         imageOption
       );
 
-      const markerPositions = [
-        {
-          title: "역",
-          latlng: new kakao.maps.LatLng(37.51924223760834, 126.92716681223602),
-        },
-        {
-          title: "TEMP",
-          latlng: new kakao.maps.LatLng(37.513302984780985, 126.9263813267745),
-        },
-      ];
-
-      for (var i = 0; i < markerPositions.length; i++) {
+      for (var i = 0; i < data.length; i++) {
         // 마커를 생성합니다
+        console.log(data[i].lng);
         new kakao.maps.Marker({
           map: this.map, // 마커를 표시할 지도
-          position: markerPositions[i].latlng, // 마커를 표시할 위치
-          title: markerPositions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+          position: new kakao.maps.LatLng(data[i].lat, data[i].lng), // 마커를 표시할 위치
+          title: data[i].house_name, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
           image: markerImage, // 마커 이미지
         });
       }
