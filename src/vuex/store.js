@@ -20,7 +20,7 @@ const state = {
         role: 2,
         user_name: "박대인"
     },
-    amount: "2억 2천 2백만",
+    amount: "",
     today: ""
 }
 

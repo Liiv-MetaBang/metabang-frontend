@@ -55,7 +55,7 @@
             </div>
             <div class="loan-footer">
                 <v-btn class="loan-btn" color="orange lighten-2" dark :href="list.url">자세히 보기</v-btn>
-                <v-btn class="loan-btn" color="brown lighten-1" dark @click="$router.push('/loan/procedure')">대출 받기</v-btn>
+                <v-btn class="loan-btn" color="brown lighten-1" dark @click="getLoan">대출 받기</v-btn>
             </div>
         </v-card>
     </div>
@@ -76,9 +76,12 @@ export default {
         }
     },
     methods: {
+        getLoan() {
+            this.$store.state.amount = this.list.max
+            this.$router.push('/loan/procedure')
+        }
     },
     mounted() {
-        console.log(this.list)
     },
 
 }
