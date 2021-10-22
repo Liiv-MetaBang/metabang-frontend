@@ -194,21 +194,29 @@ export default {
     phoneNum() {
       if (this.phoneNum.length === 11 && this.RRN.length === 6 && this.RRNN.length === 1 && this.name) {
         this.phoneCheck = true
+      } else {
+        this.phoneCheck = false
       }
     },
     name() {
       if (this.phoneNum.length === 11 && this.RRN.length === 6 && this.RRNN.length === 1 && this.name) {
         this.phoneCheck = true
+      } else {
+        this.phoneCheck = false
       }
     },
     RRNN() {
       if (this.phoneNum.length === 11 && this.RRN.length === 6 && this.RRNN.length === 1 && this.name) {
         this.phoneCheck = true
+      } else {
+        this.phoneCheck = false
       }
     },
     RRN() {
       if (this.phoneNum.length === 11 && this.RRN.length === 6 && this.RRNN.length === 1 && this.name) {
         this.phoneCheck = true
+      } else {
+        this.phoneCheck = false
       }
     }
   },
