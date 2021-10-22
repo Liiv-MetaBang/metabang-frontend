@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import rest from "../../api/httpCommon.js";
+import houserest from "../../api/HouseHttpCommon.js";
 
 export default {
   name: "RealestateSearch",
@@ -113,9 +113,9 @@ export default {
   },
   methods: {
     fetchList() {
-      rest
+      houserest
         .axios({
-          url: "user/v1/hello",
+          url: "/hello",
           method: "get",
         })
         .then((res) => {
