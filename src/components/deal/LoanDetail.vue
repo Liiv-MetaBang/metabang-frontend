@@ -4,7 +4,7 @@
             <div class='loan-header'>
                 <h2 class="loan-title">{{ list.name }}</h2>
                 <v-chip
-                    class="ma-2"
+                    class="ma-2 loan-chip"
                     color="orange"
                     text-color="white"
                     label
@@ -97,6 +97,9 @@ export default {
 }
 .loan-header .loan-title {
     margin-left: 10px;
+}
+.loan-chip {
+    min-width: 6rem;
 }
 .loan-content {
     margin-top: 10px;
