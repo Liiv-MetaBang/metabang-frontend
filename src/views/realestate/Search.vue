@@ -1,7 +1,10 @@
 <template>
   <div class="wrap components-page">
     <div class="wrapB">
-      <div style="display: flex; justify-content: space-between;">
+      <div
+        class="search"
+        style="display: flex; justify-content: space-between;"
+      >
         <v-row dense style="width: 70vw">
           <div style="display: flex;">
             <v-col cols="3" style="padding:0;">희망 지역:</v-col>
@@ -39,7 +42,7 @@
         </div>
       </div>
 
-      <div id="map" style="width:500px;height:700px;"></div>
+      <div id="map"></div>
     </div>
   </div>
 </template>
@@ -107,7 +110,7 @@ export default {
       const script = document.createElement("script");
       script.onload = () => kakao.maps.load(this.initMap);
       script.src =
-        "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=6f0cd3f675a4d46c711e67d3a74d7398";
+        "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=6f0cd3f675a4d46c711e67d3a74d7398&libraries=clusterer";
       document.head.appendChild(script);
     }
   },
@@ -119,7 +122,7 @@ export default {
           method: "get",
         })
         .then((res) => {
-          this.setMarker(res.data);
+          this.setMarkers(res.data);
         })
         .catch(() => {
           // 통신 실패
@@ -129,11 +132,16 @@ export default {
       const container = document.getElementById("map");
       const options = {
         center: new kakao.maps.LatLng(37.49721718198739, 126.9158540688247),
-        level: 4,
+        level: 5,
       };
       this.map = new kakao.maps.Map(container, options);
     },
-    setMarker(data) {
+    setMarkers(data) {
+      var clusterer = new kakao.maps.MarkerClusterer({
+        map: this.map, // 마커들을 클러스터로 관리하고 표시할 지도 객체
+        averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
+        minLevel: 4, // 클러스터 할 최소 지도 레벨
+      });
 
       const imageSrc =
           "https://cdn-icons-png.flaticon.com/512/5884/5884978.png",
@@ -146,17 +154,41 @@ export default {
         imageOption
       );
 
+      var markers = [];
       for (var i = 0; i < data.length; i++) {
         // 마커를 생성합니다
-        console.log(data[i].lng);
-        new kakao.maps.Marker({
-          map: this.map, // 마커를 표시할 지도
+        markers[i] = new kakao.maps.Marker({
+          // map: this.map, // 마커를 표시할 지도
           position: new kakao.maps.LatLng(data[i].lat, data[i].lng), // 마커를 표시할 위치
           title: data[i].house_name, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
           image: markerImage, // 마커 이미지
         });
       }
+      console.log(markers)
+      clusterer.addMarkers(markers);
+      console.log(clusterer)
+
     },
   },
+  watch: {
+    map() {
+      console.log("check")
+    }
+  }
 };
 </script>
+<style>
+.serarch {
+  height: 40vh;
+}
+#map {
+  height: 60vh;
+  width: 100%;
+}
+@media screen and (min-width: 900px) {
+  .loan {
+    max-width: 580px;
+    margin: auto;
+  }
+}
+</style>
