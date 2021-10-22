@@ -5,7 +5,7 @@ const BASE_URL =
 
 export default {
   axios: axios.create({
-    baseURL: "http://" + BASE_URL + "/house/v1/api/",
+    baseURL: "http://" + BASE_URL + "/house/v1/api",
     headers: {
       "Content-Type": "application/json",
     },
