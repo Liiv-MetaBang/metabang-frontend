@@ -115,7 +115,7 @@ export default {
     fetchList() {
       rest
         .axios({
-          url: "house/v1/list",
+          url: "user/v1/hello",
           method: "get",
         })
         .then((res) => {
