@@ -218,6 +218,5 @@ export default {
 <style>
 .cert-text {
   margin: 10px 0;
-  position: ;
 }
 </style>
