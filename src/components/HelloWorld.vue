@@ -5,10 +5,12 @@
                 test
             </div>
             <div class="content">
-                <Certification />=
-                <swiper id="maemul-list" class="swiper" :options="swiperOption">
-                  <MaemulList v-for="(maemul, idx) in maemuls" :key="idx" />
-                </swiper>
+              <Certification />
+              <v-select
+                :items="['Foo', 'Bar']"
+                label="Items"
+                @change="test($event)"
+              ></v-select>
             </div>
         </div>
     </div>
@@ -16,43 +18,22 @@
 
 <script>
 import Certification from "./user/certification/Certificaton.vue"
-import MaemulList from "./main/MaemulList.vue"
-import { Swiper } from 'vue-awesome-swiper'
-import 'swiper/css/swiper.css'
 
 
 export default {
     components: {
       Certification,
-      MaemulList,
-      Swiper,
       
     },
     data() {
       return {
         // swiper
-        maemuls: {
-          1: {},
-          2: {},
-          3: {},
-          4: {}
-        },
-        swiperOption: {
-        effect: 'coverflow',
-        grabCursor: true,
-        centeredSlides: true,
-        slidesPerView: 'auto',
-        coverflowEffect: {
-          rotate: 30,
-          stretch: 0,
-          depth: 100,
-          modifier: 1,
-          slideShadows : true
-          },
-          pagination: {
-            el: '.swiper-pagination'
-          }
-        }
+        item:''
+      }
+    },
+    methods: {
+      test(e) {
+        console.log(e)
       }
     }
 }
@@ -83,15 +64,5 @@ export default {
     max-width: 580px;
     margin: auto;
   }
-}
-#maemul-list {
-  max-width: 540px;
-  height: 25vh;
-  position: fixed;
-  bottom: 10px;
-  margin: 0 auto;
-  left: 0;
-  right: 0;
-  transition: all 300ms;
 }
 </style>
