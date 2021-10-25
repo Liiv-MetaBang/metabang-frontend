@@ -25,7 +25,8 @@ const state = {
     filtering: {
         si: "",
         gu: "",
-        price:"",
+        maxprice:"",
+        minprice:"",
     }
 }
 

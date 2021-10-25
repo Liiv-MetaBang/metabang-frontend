@@ -8,8 +8,8 @@
                 <br>
                 <v-row>
                     <v-col cols="9" style="display: flex; margin:0 auto;">
-                        <v-select @change="setSi($event)" :items="districts" label="도/광역시"></v-select>
-                        <v-select @change="setGu($event)" :items="cities" label="시/군/구"></v-select>
+                        <v-select @change="setSi($event)" :items="districts" label="도/광역시" ></v-select>
+                        <v-select @change="setGu($event)" :items="cities" label="시/군/구" ></v-select>
                     </v-col>
                 </v-row>
 
@@ -110,10 +110,10 @@ export default {
         value => !!value || '필수입니다!',
         value => (value && value.length >= 1) || 'Min 1 characters',
         ],
-        si:"",
-        gu:"",
-        minprice:'',
-        maxPrice:'',
+        // si:"",
+        // gu:"",
+        // minprice:'',
+        // maxPrice:'',
         }
     },
     watch: {
@@ -127,21 +127,35 @@ export default {
     methods: {
         setSi(a){
             this.si = a
-            //console.log(a)
+            console.log(a)
         },
         setGu(a){
             this.gu = a
-            //console.log(a)
+            console.log(a)
         },
         setPrice(){
             this.$store.state.filtering.minprice = this.minPrice
             this.$store.state.filtering.maxprice = this.maxPrice
             this.$store.state.filtering.si = this.si
             this.$store.state.filtering.gu = this.gu
-            //console.log(this.minPrice)
-            //console.log(this.maxPrice)
+            console.log(this.minPrice)
+            console.log(this.maxPrice)
         }
     },
+    computed: {
+    si() {
+      return this.$store.state.filtering.si
+    },
+    gu() {
+      return this.$store.state.filtering.gu
+    },
+    minprice(){
+       return this.$store.state.filtering.minprice
+    },
+    maxprice(){
+       return this.$store.state.filtering.maxprice
+    }
+  }
 
 }
 </script>
