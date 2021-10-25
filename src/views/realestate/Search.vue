@@ -43,16 +43,26 @@
       </div>
 
       <div id="map"></div>
+      
+      <swiper id="maemul-list" class="swiper" :options="swiperOption">
+        <MaemulList v-for="(maemul, idx) in maemuls" :key="idx" :maemul="maemul" />
+      </swiper>
     </div>
   </div>
 </template>
 
 <script>
 import houserest from "../../api/HouseHttpCommon.js";
+import MaemulList from "../../components/main/MaemulList.vue"
+import { Swiper } from 'vue-awesome-swiper'
+import 'swiper/css/swiper.css'
 
 export default {
   name: "RealestateSearch",
-  components: {},
+  components: {
+    MaemulList,
+    Swiper,
+  },
   data() {
     return {
       map: null,
@@ -102,6 +112,25 @@ export default {
         "강동구",
       ],
       realestates: null,
+      
+        maemuls: {
+        },
+        swiperOption: {
+        effect: 'coverflow',
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: 'auto',
+        coverflowEffect: {
+          rotate: 30,
+          stretch: 0,
+          depth: 100,
+          modifier: 1,
+          slideShadows : true
+          },
+          pagination: {
+            el: '.swiper-pagination'
+          }
+        }
     };
   },
   mounted() {
@@ -127,6 +156,7 @@ export default {
           console.log(res.data);
           this.realestates = res.data;
           this.setMarkers();
+          this.maemuls = res.data
         })
         .catch(() => {
           // 통신 실패
@@ -201,7 +231,7 @@ export default {
           realestate.lng >= swLatlng.getLng() &&
           realestate.lng <= neLatlng.getLng()
       );
-
+      this.maemuls = filterList
       console.log(filterList);
     },
   },
@@ -239,5 +269,15 @@ export default {
     max-width: 580px;
     margin: auto;
   }
+}
+#maemul-list {
+  max-width: 540px;
+  height: 25vh;
+  position: fixed;
+  bottom: 10px;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  transition: all 300ms;
 }
 </style>

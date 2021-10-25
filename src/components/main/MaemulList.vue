@@ -3,6 +3,15 @@
         <div class='chage-btn' @click='changeSize'>
             <i class="fas fa-chevron-up arrow"></i>
         </div>
+        <div class='maemul-content'>
+            <v-img 
+                src="https://mblogthumb-phinf.pstatic.net/20110705_81/cafewell_1309826331390kSd4p_JPEG/%25EB%2595%2585%25EC%25BD%25A9%25EC%25A7%2591%25EB%2582%25B4%25EB%25B6%25801.jpg?type=w800"
+                class="maemul-img"
+            ></v-img>
+            <div class='maemul-title'>
+                {{ maemul }}
+            </div>
+        </div>
     </swiper-slide>
 </template>
 
@@ -14,6 +23,9 @@ export default {
     components: {
         SwiperSlide,
     },
+    props: {
+        maemul: Object
+    },
     data() {
         return {
             state: true,
@@ -24,19 +36,26 @@ export default {
             let swipers = document.querySelectorAll(".swiper-slide")
             let maemulList = document.querySelector("#maemul-list")
             let arrow = document.querySelector(".arrow")
+            let content = document.querySelectorAll(".maemul-content")
+            let img = document.querySelectorAll(".maemul-img")
+            console.log(createImageBitmap)
             
             if (this.state) {
                 for (let i=0; i < swipers.length; i++) {
-                    swipers[i].style.height = "50vh"
+                    swipers[i].style.height = "70vh"
                     arrow.classList.remove("fa-chevron-up")
                     arrow.classList.add("fa-chevron-down")
+                    content[i].style.display = "block"
+                    img[i].style.width = "93%"
                 }
-                maemulList.style.height = "50vh"
+                maemulList.style.height = "70vh"
             } else {
                 for (let i=0; i < swipers.length; i++) {
                     swipers[i].style.height = "25vh"
                     arrow.classList.add("fa-chevron-up")
                     arrow.classList.remove("fa-chevron-down")
+                    content[i].style.display = "flex"
+                    img[i].style.width = "40%"
                 }
                 maemulList.style.height = "25vh"
             }
@@ -47,8 +66,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.maemule-list {
+.maemul-list {
     position: relative;
+    width: inherit;
+    max-width: 540px;
 }
 .chage-btn {
     position: absolute;
@@ -65,15 +86,26 @@ export default {
     height: 25vh;
     width: 85vw;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
     font-weight: bold;
-    background-color: rgb(185, 185, 185);
-    opacity: 0.4;
+    background-color: white;
+    opacity: 0.9;
     background-position: center;
     background-size: cover;
-    transition: all 300ms;
     border-radius: 12px 12px 12px 12px / 12px 12px 12px 12px;
+    position: relative;
+}
+.maemul-content {
+    position: relative;
+    margin-top: 22px;
+    width: 100%;
+    display: flex;
+}
+.maemul-img {
+    width: 40%;
+    max-height: 30vh;
+    margin: 10px;
+}
+.maemul-title {
+    margin: 10px;
 }
 </style>
