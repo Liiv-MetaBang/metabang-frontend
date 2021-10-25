@@ -11,14 +11,15 @@ import Procedure from "./views/deal/Procedure.vue"
 import Remit from "./views/deal/Remit.vue"
 import RemitComplete from "./views/deal/RemitComplete.vue"
 import Contract from './views/contract/Contract.vue'
+import Main from './views/realestate/Main.vue'
 
 export default [
 
 
     {
         path : '/',
-        name : 'Login',
-        component : Login
+        name : 'Main',
+        component : Main
     },
     {
         path : '/user/join',

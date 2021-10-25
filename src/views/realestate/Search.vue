@@ -114,6 +114,7 @@ export default {
         "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=6f0cd3f675a4d46c711e67d3a74d7398&libraries=clusterer";
       document.head.appendChild(script);
     }
+
   },
   methods: {
     fetchList() {
@@ -204,6 +205,22 @@ export default {
       console.log(filterList);
     },
   },
+  watch: {
+    map() {
+      console.log("check")
+    }
+  },
+  computed: {
+    si() {
+      return this.$store.state.filtering.si
+    },
+    gu() {
+      return this.$store.state.filtering.gu
+    },
+    price(){
+       return this.$store.state.filtering.price
+    }
+  }
 };
 </script>
 <style>
