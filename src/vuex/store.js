@@ -21,7 +21,12 @@ const state = {
         user_name: "박대인"
     },
     amount: "",
-    today: ""
+    today: "",
+    filtering: {
+        si: "",
+        gu: "",
+        price:"",
+    }
 }
 
 export default new Vuex.Store({
