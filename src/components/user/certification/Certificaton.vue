@@ -143,7 +143,7 @@ export default {
   name: "Certification",
   data() {
     return {
-      dialog: true,
+      dialog: false,
       loader: null,
       loading: false,
       name: '',
