@@ -207,7 +207,7 @@ export default {
   },
   watch: {
     map() {
-      console.log("check")
+      //console.log("check")
     }
   },
   computed: {
@@ -217,8 +217,11 @@ export default {
     gu() {
       return this.$store.state.filtering.gu
     },
-    price(){
-       return this.$store.state.filtering.price
+    minprice(){
+       return this.$store.state.filtering.minprice
+    },
+    maxprice(){
+       return this.$store.state.filtering.maxprice
     }
   }
 };

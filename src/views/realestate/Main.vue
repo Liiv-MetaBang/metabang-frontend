@@ -16,10 +16,17 @@
                 <v-row>
                     <v-col cols="9" style="display:flex;margin:0 auto;">
                         <v-text-field
-                        label="가격설정(백만원)"
+                        label="최소(백만원)"
                         :rules="rules"
                         hide-details="auto"
-                        v-model="inputPrice"
+                        v-model="minPrice"
+                        ></v-text-field>
+                        
+                        <v-text-field
+                        label="최대(백만원)"
+                        :rules="rules"
+                        hide-details="auto"
+                        v-model="maxPrice"
                         ></v-text-field>
                     </v-col>
                 </v-row>
@@ -105,8 +112,8 @@ export default {
         ],
         si:"",
         gu:"",
-        price:'',
-        inputPrice:'',
+        minprice:'',
+        maxPrice:'',
         }
     },
     watch: {
@@ -127,10 +134,12 @@ export default {
             //console.log(a)
         },
         setPrice(){
-            this.$store.state.filtering.price = this.inputPrice
+            this.$store.state.filtering.minprice = this.minPrice
+            this.$store.state.filtering.maxprice = this.maxPrice
             this.$store.state.filtering.si = this.si
             this.$store.state.filtering.gu = this.gu
-            //console.log(this.inputPrice)
+            //console.log(this.minPrice)
+            //console.log(this.maxPrice)
         }
     },
 
