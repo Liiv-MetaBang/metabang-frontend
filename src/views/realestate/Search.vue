@@ -1,14 +1,52 @@
 <template>
   <div class="wrap components-page" style="background:#33691E;">
     <div class="wrapB">
-      <router-link to="/">
-        <v-btn class="ma-2" outlined color="white" @click="fetchList()">
+      <div style="display: flex;">
+        <v-btn class="ma-2" outlined color="white" @click="$router.push('/')">
           필터
         </v-btn>
-        <v-btn class="ma-2" outlined color="white">
-          AI 동네추천
-        </v-btn>
-      </router-link>
+
+        <div class="ma-2">
+          <v-dialog v-model="dialog" width="500">
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                outlined
+                color="white"
+                v-bind="attrs"
+                v-on="on"
+                @click="recommendDongBasedAI()"
+              >
+                AI 동네 추천
+              </v-btn>
+            </template>
+
+            <v-card>
+              <v-card-title class="text-h5 grey lighten-2">
+                {{ dialogTitle }}
+              </v-card-title>
+
+              <v-card-text>
+                {{ dialogText }}
+              </v-card-text>
+
+              <v-divider></v-divider>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn
+                  color="primary"
+                  text
+                  @click="dialog = false"
+                  v-if="dialogExitVisibility"
+                >
+                  닫기
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </div>
+      </div>
+
       <div id="map"></div>
 
       <swiper id="maemul-list" class="swiper" :options="swiperOption">
@@ -24,6 +62,7 @@
 
 <script>
 import houserest from "../../api/HouseHttpCommon.js";
+import userrest from "../../api/UserHttpCommon.js";
 import MaemulList from "../../components/main/MaemulList.vue";
 import { Swiper } from "vue-awesome-swiper";
 import "swiper/css/swiper.css";
@@ -38,7 +77,8 @@ export default {
     return {
       map: null,
       realestates: null,
-      conditions: {},
+      filterConditions: {},
+      userInfo: {},
 
       maemuls: {},
       swiperOption: {
@@ -57,12 +97,16 @@ export default {
           el: ".swiper-pagination",
         },
       },
+
+      dialog: false,
+      dialogTitle: "AI가 결과를 도출하는 중입니다.",
+      dialogText: "잠시만 기다려주세요.",
+      dialogExitVisibility: false,
     };
   },
   mounted() {
     if (window.kakao && window.kakao.maps) {
       this.initMap();
-      this.fetchList();
     } else {
       const script = document.createElement("script");
       script.onload = () => kakao.maps.load(this.initMap);
@@ -73,13 +117,13 @@ export default {
   },
   methods: {
     fetchList() {
-      this.setCondition();
+      this.setFilterCondition();
 
       houserest
         .axios({
           url: "/filter",
           method: "post",
-          data: this.conditions,
+          data: this.filterConditions,
         })
         .then((res) => {
           console.log(res.data);
@@ -94,14 +138,10 @@ export default {
           console.log("통신 실패");
         });
     },
-    setCondition() {
-      console.log(this.gu);
-      console.log(this.si);
-      console.log(this.minprice);
-      console.log(this.maxprice);
-      this.conditions.address = this.gu;
-      this.conditions.high_price = this.maxprice * 1000000;
-      this.conditions.low_price = this.minprice * 1000000;
+    setFilterCondition() {
+      this.filterConditions.address = this.gu;
+      this.filterConditions.high_price = this.maxprice * 1000000;
+      this.filterConditions.low_price = this.minprice * 1000000;
     },
     initMap() {
       const container = document.getElementById("map");
@@ -110,6 +150,8 @@ export default {
         level: 5,
       };
       this.map = new kakao.maps.Map(container, options);
+
+      this.fetchList();
     },
     setMarkers() {
       var clusterer = new kakao.maps.MarkerClusterer({
@@ -173,6 +215,46 @@ export default {
       this.maemuls = filterList;
       console.log(filterList);
     },
+    setUserInfo() {
+      this.userInfo.age = 22;
+      this.userInfo.gender = 0;
+      this.userInfo.reason = 4;
+    },
+    recommendDongBasedAI() {
+      console.log("recommend");
+
+      this.setUserInfo();
+
+      userrest
+        .axios({
+          url: "/recommand",
+          method: "post",
+          data: this.userInfo,
+        })
+        .then((res) => {
+          console.log(res.data);
+
+          // modal setting
+          this.dialogTitle = this.gu + " " + res.data;
+          this.dialogText =
+            "고객님의 맞춤 동네는 " +
+            this.dialogTitle +
+            "입니다. 지도를 통해 매물을 둘러볼 수 있습니다.";
+          this.dialogExitVisibility = true;
+
+          this.moveMapCenter();
+        })
+        .catch(() => {
+          // 통신 실패
+          console.log("통신 실패");
+        });
+    },
+    moveMapCenter() {
+      var moveLatLon = new kakao.maps.LatLng(37.53273457121389, 126.90124980812696);
+
+      // 지도 중심을 이동
+      this.map.setCenter(moveLatLon);
+    },
   },
   computed: {
     si() {
@@ -215,12 +297,13 @@ export default {
   transition: all 300ms;
 }
 @font-face {
-    font-family: 'NEXON Lv1 Gothic OTF';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+  font-family: "NEXON Lv1 Gothic OTF";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
-.components-page{
-  padding-top:0px !important;
+.components-page {
+  padding-top: 0px !important;
 }
 </style>
