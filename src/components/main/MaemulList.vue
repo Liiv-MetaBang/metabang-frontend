@@ -15,12 +15,12 @@
                         @click="dialog=true"
                     ></v-img>
                 </template>
-                <v-carousel v-model="model">
+                <v-carousel v-model="model" style="display: flex; justify-content: center; align-items: center;">
                     <v-carousel-item
                     v-for="(url, i) in urls "
                     :key="i"
                     >
-                        <v-img :src="url"></v-img>
+                        <v-img :src="url" style="height: 100%"></v-img>
                     </v-carousel-item>
                 </v-carousel>   
                 </v-dialog>
@@ -31,11 +31,17 @@
                 <div id="font">면적 : {{ maemul.area }}㎡</div>
             </div>
             <div class="maemul-detail">
-                <h2 id="font" style="color:black;text-align:center">{{ maemul.house_name }}</h2>
-                <div id="font" style="text-align:center">전세 : {{ maemul.price/1000000 }}원 (단위: 백만원)</div>
+                <h2 id="font" style="color:black;text-align:center;margin-top:10px">{{ maemul.house_name }}</h2>
+                <div id="font" style="text-align:center">전세 : {{ maemul.price/1000000 }}(단위: 백만원)</div>
                 <div id="font" style="text-align:center">준공년도 : {{ maemul.build_date }}년</div>
                 <div id="font" style="text-align:center">면적 : {{ maemul.area }}㎡</div>
-                <div id="font" style="text-align:center">위치 : {{ maemul.address }}</div>
+                <div id="font" style="text-align:center">위치 : {{ maemul.address }}</div><br>
+                <div id="font" style="text-align:center"> 
+                    <button id="button" onclick="window.open('https://gather.town/app/kgN3L9h4CdERI4zk/test');">메타버스 입장</button> 
+                    <router-link to='/reservation' id="font"><button id="button" >방문예약</button></router-link>
+                    <router-link to='/contract' id="font"><button id="button">계약하기</button></router-link>
+                </div>
+                
                 
             </div>
         </div>
@@ -178,5 +184,12 @@ export default {
     margin: 10px;
     overflow: scroll;
 }
-
+#button{
+    border:5px solid olive;
+    border-radius:50%;
+    background:olive;
+    margin:0 2%;
+    font-size:small;
+    color:white
+}
 </style>
