@@ -1,9 +1,12 @@
 <template>
-  <div class="wrap components-page">
+  <div class="wrap components-page" style="background:#33691E;">
     <div class="wrapB">
       <router-link to="/">
-        <v-btn class="ma-2" outlined fab color="indigo" @click="fetchList()">
+        <v-btn class="ma-2" outlined color="white" @click="fetchList()">
           필터
+        </v-btn>
+        <v-btn class="ma-2" outlined color="white">
+          AI 동네추천
         </v-btn>
       </router-link>
       <div id="map"></div>
@@ -184,7 +187,7 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .serarch {
   height: 40vh;
 }
@@ -207,5 +210,14 @@ export default {
   left: 0;
   right: 0;
   transition: all 300ms;
+}
+@font-face {
+    font-family: 'NEXON Lv1 Gothic OTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+.components-page{
+  padding-top:0px !important;
 }
 </style>

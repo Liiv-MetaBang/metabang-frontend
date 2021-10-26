@@ -1,9 +1,9 @@
 <template>
-    <swiper-slide class='maemul-list swiper-slide'>
+    <swiper-slide class='maemul-list swiper-slide' >
         <div class='chage-btn' @click='changeSize'>
             <i class="fas fa-chevron-up arrow"></i>
         </div>
-        <div class='maemul-content'>
+        <div class='maemul-content' style="background:yellow">
             <v-dialog
                 v-model="dialog"
                 width="500"
@@ -26,16 +26,21 @@
                 </v-dialog>
             
             <div class='maemul-title'>
-                <h3>{{ maemul.house_name }}</h3>
-                <div>전세 {{ maemul.price }}</div>
-                <div>준공년도({{ maemul.build_date }})</div>
-                <div>면적 {{ maemul.area }}㎡</div>
+                <h3 id="font">{{ maemul.house_name }}</h3>
+                <div id="font">전세 : {{ maemul.price/1000000 }}백만원</div>
+                <div id="font">면적 : {{ maemul.area }}㎡</div>
             </div>
             <div class="maemul-detail">
-                {{ maemul }}
+                <h2 id="font" style="color:black;text-align:center">{{ maemul.house_name }}</h2>
+                <div id="font" style="text-align:center">전세 : {{ maemul.price/1000000 }}원 (단위: 백만원)</div>
+                <div id="font" style="text-align:center">준공년도 : {{ maemul.build_date }}년</div>
+                <div id="font" style="text-align:center">면적 : {{ maemul.area }}㎡</div>
+                <div id="font" style="text-align:center">위치 : {{ maemul.address }}</div>
+                
             </div>
         </div>
     </swiper-slide>
+    
 </template>
 
 <script>
@@ -64,6 +69,7 @@ export default {
                 "https://dkne.s3.ap-northeast-2.amazonaws.com/detail/d2.PNG",
                 "https://dkne.s3.ap-northeast-2.amazonaws.com/detail/d3.PNG", 
             ],
+          
         }
     },
     methods: {
@@ -107,6 +113,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@font-face {
+    font-family: 'NEXON Lv1 Gothic OTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+#font{
+    font-family: 'NEXON Lv1 Gothic OTF' !important;
+    font-weight: 900
+}
 .maemul-list {
     position: relative;
     width: inherit;
@@ -118,6 +134,7 @@ export default {
     width: 100%;
     display: flex;
     justify-content: center;
+    background:yellowgreen;
 }
 .arrow {
     font-size: 1.4rem;
@@ -152,12 +169,14 @@ export default {
     width: 60%;
     margin: 10px;
     overflow: scroll;
+    font-family: 'NEXON Lv1 Gothic OTF';
 }
 .maemul-detail {
     display: none;
     position: relative;
-    width: 100%;
+    width: 92%;
     margin: 10px;
     overflow: scroll;
 }
+
 </style>
