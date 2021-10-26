@@ -1,51 +1,19 @@
 <template>
   <div class="wrap components-page">
     <div class="wrapB">
-      <div
-        class="search"
-        style="display: flex; justify-content: space-between;"
-      >
-        <v-row dense style="width: 70vw">
-          <div style="display: flex;">
-            <v-col cols="3" style="padding:0;">희망 지역:</v-col>
-            <v-col cols="9" style="padding:0; display: flex;">
-              <v-select :items="districts" label="도/광역시" solo></v-select>
-              <v-select :items="cities" label="시/군/구" solo></v-select>
-            </v-col>
-          </div>
-
-          <div style="display: flex;">
-            <v-col cols="3" style="padding:0;">
-              희망 가격대: <br />
-              (단위: 천만원)
-            </v-col>
-            <v-col
-              cols="8"
-              style="display: flex; padding:0; vertical-align: middle;"
-            >
-              <v-col cols="5" style="padding:0;">
-                <v-text-field type="number" label="최솟값" solo></v-text-field>
-              </v-col>
-              <v-col cols="1" style="padding:0; align: vertical;">
-                ~
-              </v-col>
-              <v-col cols="5" style="padding:0;">
-                <v-text-field label="최댓값" solo></v-text-field>
-              </v-col>
-            </v-col>
-          </div>
-        </v-row>
-        <div>
-          <v-btn class="ma-2" outlined fab color="indigo" @click="fetchList()">
-            검색
-          </v-btn>
-        </div>
-      </div>
-
+      <router-link to="/">
+        <v-btn class="ma-2" outlined fab color="indigo" @click="fetchList()">
+          필터
+        </v-btn>
+      </router-link>
       <div id="map"></div>
-      
+
       <swiper id="maemul-list" class="swiper" :options="swiperOption">
-        <MaemulList v-for="(maemul, idx) in maemuls" :key="idx" :maemul="maemul" />
+        <MaemulList
+          v-for="(maemul, idx) in maemuls"
+          :key="idx"
+          :maemul="maemul"
+        />
       </swiper>
     </div>
   </div>
@@ -53,9 +21,9 @@
 
 <script>
 import houserest from "../../api/HouseHttpCommon.js";
-import MaemulList from "../../components/main/MaemulList.vue"
-import { Swiper } from 'vue-awesome-swiper'
-import 'swiper/css/swiper.css'
+import MaemulList from "../../components/main/MaemulList.vue";
+import { Swiper } from "vue-awesome-swiper";
+import "swiper/css/swiper.css";
 
 export default {
   name: "RealestateSearch",
@@ -66,76 +34,32 @@ export default {
   data() {
     return {
       map: null,
-      districts: [
-        "서울특별시",
-        "부산광역시",
-        "인천광역시",
-        "대구광역시",
-        "대전광역시",
-        "광주광역시",
-        "울산광역시",
-        "경기도",
-        "강원도",
-        "충청북도",
-        "충청남도",
-        "전라북도",
-        "전라남도",
-        "경상북도",
-        "경상남도",
-        "제주특별자치도",
-      ],
-      cities: [
-        "종로구",
-        "중구",
-        "용산구",
-        "성동구",
-        "광진구",
-        "동대문구",
-        "중랑구",
-        "성북구",
-        "강북구",
-        "도봉구",
-        "노원구",
-        "은평구",
-        "서대문구",
-        "마포구",
-        "양천구",
-        "강서구",
-        "구로구",
-        "금천구",
-        "영등포구",
-        "동작구",
-        "관악구",
-        "서초구",
-        "강남구",
-        "송파구",
-        "강동구",
-      ],
       realestates: null,
-      
-        maemuls: {
-        },
-        swiperOption: {
-        effect: 'coverflow',
+      conditions: {},
+
+      maemuls: {},
+      swiperOption: {
+        effect: "coverflow",
         grabCursor: true,
         centeredSlides: true,
-        slidesPerView: 'auto',
+        slidesPerView: "auto",
         coverflowEffect: {
           rotate: 30,
           stretch: 0,
           depth: 100,
           modifier: 1,
-          slideShadows : true
-          },
-          pagination: {
-            el: '.swiper-pagination'
-          }
-        }
+          slideShadows: true,
+        },
+        pagination: {
+          el: ".swiper-pagination",
+        },
+      },
     };
   },
   mounted() {
     if (window.kakao && window.kakao.maps) {
       this.initMap();
+      this.fetchList();
     } else {
       const script = document.createElement("script");
       script.onload = () => kakao.maps.load(this.initMap);
@@ -143,24 +67,35 @@ export default {
         "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=6f0cd3f675a4d46c711e67d3a74d7398&libraries=clusterer";
       document.head.appendChild(script);
     }
-
   },
   methods: {
     fetchList() {
+      this.setCondition();
+
       houserest
         .axios({
-          url: "",
-          method: "get",
+          url: "/filter",
+          method: "post",
+          data: this.conditions,
         })
         .then((res) => {
           console.log(res.data);
+
           this.realestates = res.data;
           this.setMarkers();
-          this.maemuls = res.data
+
+          this.maemuls = res.data;
         })
         .catch(() => {
           // 통신 실패
+          console.log("통신 실패");
         });
+    },
+    setCondition() {
+      console.log(this.gu);
+      this.conditions.address = "영등포구 신길동";
+      this.conditions.high_layer = 10000000;
+      this.conditions.low_layer = this.minprice;
     },
     initMap() {
       const container = document.getElementById("map");
@@ -201,9 +136,7 @@ export default {
           image: markerImage, // 마커 이미지
         });
       }
-      console.log(markers);
       clusterer.addMarkers(markers);
-      console.log(clusterer);
 
       this.addFilterListEvent();
     },
@@ -231,29 +164,24 @@ export default {
           realestate.lng >= swLatlng.getLng() &&
           realestate.lng <= neLatlng.getLng()
       );
-      this.maemuls = filterList
+      this.maemuls = filterList;
       console.log(filterList);
     },
   },
-  watch: {
-    map() {
-      //console.log("check")
-    }
-  },
   computed: {
     si() {
-      return this.$store.state.filtering.si
+      return this.$store.state.filtering.si;
     },
     gu() {
-      return this.$store.state.filtering.gu
+      return this.$store.state.filtering.gu;
     },
-    minprice(){
-       return this.$store.state.filtering.minprice
+    minprice() {
+      return this.$store.state.filtering.minprice;
     },
-    maxprice(){
-       return this.$store.state.filtering.maxprice
-    }
-  }
+    maxprice() {
+      return this.$store.state.filtering.maxprice;
+    },
+  },
 };
 </script>
 <style>
