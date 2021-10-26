@@ -34,9 +34,9 @@
     computed: {
       color () {
         switch (this.value) {
-          case 0: return '#1B5E20'
+          case 0: return '#66BB6A'
           case 1: return 'teal'
-          case 2: return 'brown'
+          case 2: return '#FFC107'
           default: return 'yellow'
         }
       },
