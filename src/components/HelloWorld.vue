@@ -6,6 +6,7 @@
             </div>
             <div class="content">
               <Certification />
+              <DrawingCanvas />
               <v-select
                 :items="['Foo', 'Bar']"
                 label="Items"
@@ -18,11 +19,12 @@
 
 <script>
 import Certification from "./user/certification/Certificaton.vue"
-
+import DrawingCanvas from "./contract/DrawingCanvas.vue"
 
 export default {
     components: {
       Certification,
+      DrawingCanvas,
       
     },
     data() {
