@@ -110,11 +110,12 @@ export default {
         value => !!value || '필수입니다!',
         value => (value && value.length >= 1) || 'Min 1 characters',
         ],
-        // si:"",
-        // gu:"",
+        si:"",
+        gu:"",
         // minprice:'',
         // maxPrice:'',
         }
+
     },
     watch: {
       loader () {
@@ -127,35 +128,36 @@ export default {
     methods: {
         setSi(a){
             this.si = a
-            console.log(a)
+            //console.log(a)
         },
         setGu(a){
             this.gu = a
-            console.log(a)
+            //console.log(a)
         },
         setPrice(){
             this.$store.state.filtering.minprice = this.minPrice
             this.$store.state.filtering.maxprice = this.maxPrice
             this.$store.state.filtering.si = this.si
             this.$store.state.filtering.gu = this.gu
-            console.log(this.minPrice)
-            console.log(this.maxPrice)
+        
+            //console.log(this.minPrice)
+            //console.log(this.maxPrice)
         }
     },
-    computed: {
-    si() {
-      return this.$store.state.filtering.si
-    },
-    gu() {
-      return this.$store.state.filtering.gu
-    },
-    minprice(){
-       return this.$store.state.filtering.minprice
-    },
-    maxprice(){
-       return this.$store.state.filtering.maxprice
-    }
-  }
+    // computed: {
+    // si() {
+    //   return this.$store.state.filtering.si
+    // },
+    // gu() {
+    //   return this.$store.state.filtering.gu
+    // },
+    // minprice(){
+    //    return this.$store.state.filtering.minprice
+    // },
+    // maxprice(){
+    //    return this.$store.state.filtering.maxprice
+    // }
+    // }
 
 }
 </script>
