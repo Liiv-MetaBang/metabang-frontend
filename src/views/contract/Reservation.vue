@@ -1,19 +1,18 @@
 <template>
   <div class="wrap components-page">
-    <div class="wrapB">
-      <div class="wrap">
-        <HeaderComponent headerTitle="방문 예약 📞" :isBack="true" />
+    <div class="wrap">
+        <!--<HeaderComponent headerTitle="방문 예약 📞" style="text-align:center;" />-->
+        <h1 style="background:yellowgreen; height:60px; display: flex; justify-content: center; align-items: center;">방문 예약</h1>
+      
       </div>
-      <br><br><br><br>
-      <v-form ref="form" v-model="valid" lazy-validation>
-        <v-text-field
-          v-model="position"
-          :counter="10"
-          :rules="positionRules"
-          label="매물위치"
-          required
-        ></v-text-field>
+    <div class="wrapB">
 
+      <br><br><br><br>
+      <div style='text-align:center'>
+        <img src="../../../public/img/라무.png">
+      </div>
+      <br>
+      <v-form ref="form" v-model="valid" lazy-validation>
         <v-text-field
           v-model="date"
           :counter="10"
@@ -33,43 +32,42 @@
         <v-checkbox
           v-model="checkbox"
           :rules="[(v) => !!v || '동의하셔야 계속 할 수 있어요!']"
-          label="방문예약 내용을 확인하셨나요?"
+          label="방문예약 내용을 다시 확인하셨나요?"
+          
           required
+          
         ></v-checkbox>
 
         <v-btn
           :disabled="!valid"
-          color="success"
+          color="yellow"
           class="mr-4"
           @click="validate"
-          
+          style="margin:1% 17%;"
         >
           예약하기
         </v-btn>
 
-        <v-btn color="error" class="mr-4" @click="reset">
+        <v-btn color="orange" class="mr-4" @click="reset" style="margin:1% 17%">
           재작성
         </v-btn>
 
       </v-form>
     </div>
+    <BottomNavigation />
   </div>
 </template>
 
 <script>
-import HeaderComponent from "../../components/common/Header";
+import BottomNavigation from '../../components/common/BottomNavigation';
 
 export default {
   components: {
-    HeaderComponent,
+    BottomNavigation,
+   
   },
   data: () => ({
-    valid: true,
-    position: "",
-    positionRules: [
-      (v) => !!v || "매물 위치 값을 넣어주세요!",
-      (v) => (v && v.length <= 10) || "Position must be less than 10 characters",
-    ],
+    
     date: "",
     dateRules: [
       (v) => !!v || "날짜를 기입하세요!",
@@ -106,7 +104,7 @@ export default {
 }
 
 .components-page .header-default {
-  background:linear-gradient(to right, plum, pink);
+  background:linear-gradient(to right, yellow, yellowgreen);
   width:100%
 }
 
