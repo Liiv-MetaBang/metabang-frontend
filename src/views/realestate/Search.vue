@@ -93,9 +93,12 @@ export default {
     },
     setCondition() {
       console.log(this.gu);
-      this.conditions.address = "영등포구 신길동";
-      this.conditions.high_layer = 10000000;
-      this.conditions.low_layer = this.minprice;
+      console.log(this.si);
+      console.log(this.minprice);
+      console.log(this.maxprice);
+      this.conditions.address = this.gu;
+      this.conditions.high_price = this.maxprice * 1000000;
+      this.conditions.low_price = this.minprice * 1000000;
     },
     initMap() {
       const container = document.getElementById("map");
