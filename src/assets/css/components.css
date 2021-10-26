@@ -6,6 +6,12 @@
 /*14px*/
 /*12px*/
 /*12px*/
+@font-face {
+  font-family: 'NEXON Lv1 Gothic OTF';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
 @keyframes shine-lines {
   0% {
     background-position: -100px; }
@@ -18,7 +24,8 @@
     background-position: 208px; } }
 .components-page {
   padding-top: 50px;
-  padding-bottom: 100px; }
+  padding-bottom: 100px; 
+  font-family: 'NEXON Lv1 Gothic OTF';}
   .components-page h1 {
     text-align: center;
     font-weight: 600;
@@ -233,7 +240,8 @@
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
-      word-wrap: normal; }
+      word-wrap: normal; 
+      font-family: 'NEXON Lv1 Gothic OTF';}
     .components-page .header-default .menu {
       width: 30px;
       height: 30px;
