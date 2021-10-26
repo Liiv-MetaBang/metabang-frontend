@@ -1,32 +1,27 @@
 <template>
   <div class="wrap components-page">
     <div class="wrap">
-      
       <h1
         style="background:yellowgreen; height:60px; display: flex; justify-content: center; align-items: center;"
       >
         계약 체크리스트 📃
-      </h1><br>
+      </h1>
+      <br />
     </div>
-    
+
     <div class="wrapB">
       <div style="text-align:center">
-      <img src="../../../public/img/키키.png">
+        <img src="../../../public/img/키키.png" />
       </div>
       <v-list subheader three-line>
         <v-subheader style="font-size:18px;font-family:'NEXON Lv1 Gothic OTF'"
-          >배성재님~ <br>계약전에 체크리스트를 꼭 확인하세요!</v-subheader
+          >{{ name }}님 <br />계약전에 체크리스트를 꼭 확인하세요!</v-subheader
         >
-
       </v-list>
 
       <v-divider></v-divider>
 
       <v-list flat subheader three-line>
-        <v-subheader style="font-size:20px; font-family:'NEXON Lv1 Gothic OTF'"
-          >[Checklist]</v-subheader
-        >
-
         <v-list-item-group v-model="settings" multiple active-class="">
           <v-list-item>
             <template v-slot:default="{ active }">
@@ -113,8 +108,8 @@
           >
         </template>
       </v-progress-linear>
-      </div>
-    
+    </div>
+
     <BottomNavigation />
   </div>
 </template>
@@ -133,27 +128,32 @@ export default {
       skill: 50,
     };
   },
+  computed:{
+    name() {
+      return this.$store.state.user.user_name
+    },
+  }
 };
 </script>
 
 <style scoped>
 @font-face {
-    font-family: 'NEXON Lv1 Gothic OTF';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+  font-family: "NEXON Lv1 Gothic OTF";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
-.components-page{
-    padding-top:0px;
-}
-
-.components-page .header-default{
-    background:linear-gradient(to right, plum, pink);
-    width:100%
+.components-page {
+  padding-top: 0px;
 }
 
-.v-responsive__content{
-    width:100px;
+.components-page .header-default {
+  background: linear-gradient(to right, plum, pink);
+  width: 100%;
 }
 
+.v-responsive__content {
+  width: 100px;
+}
 </style>
