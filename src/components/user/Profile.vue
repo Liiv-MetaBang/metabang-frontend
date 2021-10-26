@@ -75,6 +75,8 @@
                                 :items="reasons"
                                 solo
                                 hide-details="true"
+                                :label=reasons[user.reason]
+                                @change="setReason($event)"
                                 style="width: 70%; height: 70%; margin-left:auto;"
                             ></v-select>
                         </div>
@@ -134,6 +136,10 @@ export default {
                 this.$store.state.user = this.man
             }
             this.profile = !this.profile
+        },
+        setReason(event) {
+            
+            this.$store.state.user.reason = this.reasons.indexOf(event)
         }
     }
 
