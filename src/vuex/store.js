@@ -10,10 +10,13 @@ const state = {
     isUser: false,
     user: {
         account: "123456-01-112233",
-        email: "test@gmail.com",
+        email: "Kookmin@gmail.com",
         role: 1,
         user_name: "김국민",
         sign: '',
+        gender: 0,
+        age: 22,
+        reason: 4,
     },
     lessor: {
         account: "987654-02-445566",
