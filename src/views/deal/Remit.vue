@@ -56,6 +56,8 @@
 
 
 <script>
+import { mapMutations } from 'vuex';
+
 export default {
     name: "Remit",
     components: {
@@ -76,9 +78,12 @@ export default {
             const minute = ('0' + today.getMinutes()).slice(-2);
 
             const dateString = `${year}년 ${month}월 ${day}일 ${hour}:${minute}`
-            this.$store.state.today = dateString
+            this.setDate(dateString)
             this.$router.push('/remit/complete')
-        }
+        },
+        ...mapMutations({
+            setDate: "setDate"
+        })
     },
     mounted() {
     },

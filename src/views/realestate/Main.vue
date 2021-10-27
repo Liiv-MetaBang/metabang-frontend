@@ -67,6 +67,7 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 export default {
   name: "Main",
   data() {
@@ -124,8 +125,8 @@ export default {
       ],
       si: "",
       gu: "",
-      // minprice:'',
-      // maxPrice:'',
+      minprice:'',
+      maxprice:'',
     };
   },
   watch: {
@@ -141,18 +142,26 @@ export default {
       this.si = a;
       //console.log(a)
     },
-    setGu(a) {
-      this.gu = a;
-      //console.log(a)
-    },
-    setPrice() {
-      this.$store.state.filtering.minprice = this.minPrice;
-      this.$store.state.filtering.maxprice = this.maxPrice;
-      this.$store.state.filtering.si = this.si;
-      this.$store.state.filtering.gu = this.gu;
-
-      //console.log(this.minPrice)
-      //console.log(this.maxPrice)
+    methods: {
+        setSi(a){
+            this.si = a
+            //console.log(a)
+        },
+        setGu(a){
+            this.gu = a
+            //console.log(a)
+        },
+        setPrice(){
+            this.setFiltering({
+                si: this.si,
+                gu: this.gu,
+                maxprice: this.maxprice,
+                minprice: this.minprice
+            })
+        },
+        ...mapMutations({
+            setFiltering: "setFiltering"
+        })
     },
   },
   // computed: {

@@ -62,6 +62,8 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
+
 export default {
     name: "LoanDetail",
     components: {
@@ -77,9 +79,12 @@ export default {
     },
     methods: {
         getLoan() {
-            this.$store.state.amount = this.list.max
+            this.setAmount(this.list.max)
             this.$router.push('/loan/procedure')
-        }
+        },
+        ...mapMutations({
+            setAmount: "setAmount"
+        })
     },
     mounted() {
     },
