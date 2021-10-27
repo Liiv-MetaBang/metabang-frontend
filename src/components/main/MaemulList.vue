@@ -43,7 +43,7 @@
                 <div id="font" style="text-align:center"> 
                     <button id="button" onclick="window.open('https://gather.town/app/kgN3L9h4CdERI4zk/test');">메타버스 입장</button> 
                     <router-link to='/reservation' id="font"><button id="button" >방문예약</button></router-link>
-                    <router-link to='/contract' id="font"><button id="button">계약하기</button></router-link>
+                    <router-link to='/contract' id="font"><button id="button" @click="contract">계약하기</button></router-link>
                 </div>
                 
                 
@@ -55,6 +55,7 @@
 
 <script>
 import { SwiperSlide } from 'vue-awesome-swiper'
+import { mapMutations } from 'vuex'
 // import 
 
 export default {
@@ -82,6 +83,12 @@ export default {
         }
     },
     methods: {
+        ...mapMutations({
+            setMaemul: "setMaemul",
+        }),
+        contract() {
+            this.setMaemul(this.maemul)
+        },
         changeSize() {
             let swipers = document.querySelectorAll(".swiper-slide")
             let maemulList = document.querySelector("#maemul-list")

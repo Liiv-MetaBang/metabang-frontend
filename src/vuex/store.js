@@ -1,8 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-// import getters from './getters'
-// import actions from './actions'
-// import mutations from './mutations'
 import createPersistedState from 'vuex-persistedstate';
 
 Vue.use(Vuex)
@@ -33,6 +30,25 @@ const state = {
         gu: "",
         maxprice:"",
         minprice:"",
+    },
+    maemul: {
+        address: '',
+        area: '',
+        build_date: '',
+        house_id: '',
+        house_name: '',
+        lat: '',
+        layer: '',
+        lng: '',
+        price: '',
+        thumbnail: '',
+    },
+    checkList: {
+        loan: false,
+        right: false,
+        certification: false,
+        special: false,
+        date: false,
     }
 }
 
@@ -52,6 +68,27 @@ const mutations = {
     setFiltering(state, filtering) {
         state.filtering = filtering
     },
+    setMaemul(state, maemul) {
+        state.maemul = maemul
+    },
+    setCheckList(state, checkList) {
+        state.checkList = checkList
+    }
+    // setRight(state, right) {
+    //     state.maemul.right = right
+    // },
+    // setLoan(state, loan) {
+    //     state.maemul.loan = loan
+    // },
+    // setCertification(state, certification) {
+    //     state.maemul.certification = certification
+    // },
+    // setSpecial(state, special) {
+    //     state.maemul.special = special
+    // },
+    // setDate(state, date) {
+    //     state.maemul.date = date
+    // }
 }
 
 const getters = {
