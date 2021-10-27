@@ -30,14 +30,14 @@
               label="최소(백만원)"
               :rules="rules"
               hide-details="auto"
-              v-model="minPrice"
+              v-model="minprice"
             ></v-text-field>
 
             <v-text-field
               label="최대(백만원)"
               :rules="rules"
               hide-details="auto"
-              v-model="maxPrice"
+              v-model="maxprice"
             ></v-text-field>
           </v-col>
         </v-row>
@@ -138,46 +138,26 @@ export default {
     },
   },
   methods: {
-    setSi(a) {
-      this.si = a;
-      //console.log(a)
-    },
-    methods: {
-        setSi(a){
-            this.si = a
-            //console.log(a)
-        },
-        setGu(a){
-            this.gu = a
-            //console.log(a)
-        },
-        setPrice(){
-            this.setFiltering({
-                si: this.si,
-                gu: this.gu,
-                maxprice: this.maxprice,
-                minprice: this.minprice
-            })
-        },
-        ...mapMutations({
-            setFiltering: "setFiltering"
-        })
-    },
-  },
-  // computed: {
-  // si() {
-  //   return this.$store.state.filtering.si
-  // },
-  // gu() {
-  //   return this.$store.state.filtering.gu
-  // },
-  // minprice(){
-  //    return this.$store.state.filtering.minprice
-  // },
-  // maxprice(){
-  //    return this.$store.state.filtering.maxprice
-  // }
-  // }
+      setSi(a){
+          this.si = a
+          //console.log(a)
+      },
+      setGu(a){
+          this.gu = a
+          //console.log(a)
+      },
+      setPrice(){
+          this.setFiltering({
+              si: this.si,
+              gu: this.gu,
+              maxprice: this.maxprice,
+              minprice: this.minprice
+          })
+      },
+      ...mapMutations({
+          setFiltering: "setFiltering"
+      })
+  }
 };
 </script>
 

@@ -18,16 +18,18 @@
                     margin="0"
                     :lock="disabled"
                 />
-                <v-btn @click="reset">초기화</v-btn>
+                <v-btn @click="reset" color=yellow style="margin-left:3%">초기화</v-btn>
 
-                <v-btn @click="save">
-                    <span v-if="!disabled">완료</span>
+                
+                <v-btn @click="save" color=green style="margin-left:5px">
+                    <span v-if="!disabled" >저장</span>
                     <span v-else>수정</span>
                 </v-btn>
+                
             </div>
         </div>
         
-        <v-img :src="user.sign"></v-img>
+        <!-- <v-img :src="user.sign"></v-img> -->
     </div>
 </template>
 
