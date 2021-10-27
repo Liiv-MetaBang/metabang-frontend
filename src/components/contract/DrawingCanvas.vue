@@ -29,7 +29,7 @@
             </div>
         </div>
         
-        <!--<v-img :src="user.sign"></v-img>-->
+        <!-- <v-img :src="user.sign"></v-img> -->
     </div>
 </template>
 
