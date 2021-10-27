@@ -15,7 +15,7 @@
                     size="30px"
                 >mdi-account-circle
                 </v-icon>
-                <span v-if="dialog" style="font-size:12px; font-family: 'NEXON Lv1 Gothic OTF'">매물검색</span>
+                <span style="font-size:12px; font-family: 'NEXON Lv1 Gothic OTF'">프로필</span>
             </div>
         </template>
 
