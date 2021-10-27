@@ -2,7 +2,13 @@
   <div class="wrap components-page">
     <div class="wrap">
       <h1
-        style="background:yellowgreen; height:60px; display: flex; justify-content: center; align-items: center;"
+        style="
+          background: yellowgreen;
+          height: 60px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        "
       >
         계약 체크리스트 📃
       </h1>
@@ -10,11 +16,12 @@
     </div>
 
     <div class="wrapB">
-      <div style="text-align:center">
+      <div style="text-align: center">
         <img src="../../../public/img/키키.png" />
       </div>
       <v-list subheader three-line>
-        <v-subheader style="font-size:18px;font-family:'NEXON Lv1 Gothic OTF'"
+        <v-subheader
+          style="font-size: 18px; font-family: 'NEXON Lv1 Gothic OTF'"
           >{{ name }}님 <br />계약전에 체크리스트를 꼭 확인하세요!</v-subheader
         >
       </v-list>
@@ -22,11 +29,14 @@
       <v-divider></v-divider>
 
       <v-list flat subheader three-line>
-        <v-list-item-group v-model="settings" multiple active-class="">
+        <v-list-item-group multiple active-class="">
           <v-list-item>
             <template v-slot:default="{ active }">
-              <v-list-item-action>
-                <v-checkbox :input-value="active"></v-checkbox>
+              <v-list-item-action @click="changeSkill(0)">
+                <v-checkbox
+                  :input-value="active"
+                  v-model="checkbox[0]"
+                ></v-checkbox>
               </v-list-item-action>
 
               <v-list-item-content>
@@ -40,8 +50,11 @@
 
           <v-list-item>
             <template v-slot:default="{ active }">
-              <v-list-item-action>
-                <v-checkbox :input-value="active"></v-checkbox>
+              <v-list-item-action @click="changeSkill(1)">
+                <v-checkbox
+                  :input-value="active"
+                  v-model="checkbox[1]"
+                ></v-checkbox>
               </v-list-item-action>
 
               <v-list-item-content>
@@ -55,8 +68,11 @@
 
           <v-list-item>
             <template v-slot:default="{ active }">
-              <v-list-item-action>
-                <v-checkbox :input-value="active"></v-checkbox>
+              <v-list-item-action @click="changeSkill(2)">
+                <v-checkbox
+                  :input-value="active"
+                  v-model="checkbox[2]"
+                ></v-checkbox>
               </v-list-item-action>
 
               <v-list-item-content>
@@ -71,8 +87,11 @@
 
           <v-list-item>
             <template v-slot:default="{ active }">
-              <v-list-item-action>
-                <v-checkbox :input-value="active"></v-checkbox>
+              <v-list-item-action @click="changeSkill(3)">
+                <v-checkbox
+                  :input-value="active"
+                  v-model="checkbox[3]"
+                ></v-checkbox>
               </v-list-item-action>
 
               <v-list-item-content>
@@ -87,8 +106,11 @@
 
           <v-list-item>
             <template v-slot:default="{ active }">
-              <v-list-item-action>
-                <v-checkbox :input-value="active"></v-checkbox>
+              <v-list-item-action @click="changeSkill(4)">
+                <v-checkbox
+                  :input-value="active"
+                  v-model="checkbox[4]"
+                ></v-checkbox>
               </v-list-item-action>
 
               <v-list-item-content>
@@ -103,7 +125,7 @@
       </v-list>
       <v-progress-linear v-model="skill" color="yellow" height="25">
         <template v-slot:default="{ value }">
-          <strong style="font-family:'NEXON Lv1 Gothic OTF'"
+          <strong style="font-family: 'NEXON Lv1 Gothic OTF'"
             >{{ Math.ceil(value) }}%</strong
           >
         </template>
@@ -122,17 +144,27 @@ export default {
   components: {
     BottomNavigation,
   },
+  methods: {
+    changeSkill(index) {
+      console.log(this.checkbox)
+      if (this.checkbox[index]) {
+        this.skill += 20;
+      } else {
+        this.skill -= 20;
+      }
+    },
+  },
   data: () => {
     return {
-      settings: [],
-      skill: 50,
+      skill: 0,
+      checkbox: [false, false, false, false, false],
     };
   },
-  computed:{
+  computed: {
     name() {
-      return this.$store.state.user.user_name
+      return this.$store.state.user.user_name;
     },
-  }
+  },
 };
 </script>
 
