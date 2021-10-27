@@ -1,5 +1,5 @@
 <template>
-  <div class="wrap components-page" style="background: #009688">
+  <div class="wrap components-page" style="background: #FFCC80">
     <div class="wrapB"> 
       <div style="display: flex; justify-content:center; align-items: center; "> 
         <img src="../../../public/img/비비.png" style="width:50px;height:50px">
@@ -324,7 +324,7 @@ export default {
   left: 0;
   right: 0;
   transition: all 300ms;
-  background:#009688;
+  background:#FFCC80;
 }
 @font-face {
   font-family: "NEXON Lv1 Gothic OTF";

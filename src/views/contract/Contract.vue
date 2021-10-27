@@ -51,7 +51,7 @@
             <br><br>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="white darken-1" style="background:navy" text @click="dialog = false" >
+              <v-btn color="white darken-1" style="background:navy" text @click="gotoChecklist" >
                 확인
               </v-btn>
               <v-btn color="white darken-1" style="background:red" text @click="dialog = false">
@@ -81,6 +81,12 @@ export default {
       dialog: false,
     };
   },
+  methods:{
+    gotoChecklist(){
+      this.dialog = false
+      this.$router.push(`/checklist`)
+    }
+  }
 };
 </script>
 

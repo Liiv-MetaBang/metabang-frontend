@@ -98,9 +98,9 @@
               </v-list-item-action>
 
               <v-list-item-content>
-                <v-list-item-title>사항</v-list-item-title>
+                <v-list-item-title>계약서</v-list-item-title>
                 <v-list-item-subtitle
-                  >계약서 내용에 특약사항, 협의사항
+                  >계약서 작성하면서 특약사항, 협의사항
                   확인하기!</v-list-item-subtitle
                 >
               </v-list-item-content>
@@ -138,7 +138,7 @@
     <div v-if="skill===100" style="display:flex; justify-content:center;flex-direction:column;align-items:center">
        <h2 style="font-family: 'NEXON Lv1 Gothic OTF';color:red;text-align:center"> 축하합니다~ 체크리스트 100% 달성!</h2>
       <img src="../../../public/img/콜리.png" style="width:150px;height:auto"  ><br>
-      <button id="complete" :click="gotoConfirm"> 계약 내용 확인 </button>
+      <button id="complete" @click="gotoConfirm"> 계약 내용 확인 </button>
     </div>
     <BottomNavigation />
   </div>
