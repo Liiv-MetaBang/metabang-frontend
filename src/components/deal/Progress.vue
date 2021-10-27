@@ -10,10 +10,11 @@
         <div class="progress-content-after">
             <h2 class="progress-text">대출 완료!</h2>
             <v-btn 
-            color="blue-grey lighten-1"
+            color="yellow lighten-1"
             dark
             class="progress-sendBtn" 
             @click="$router.push('/remit')"
+            style="color:black"
             >송금하기</v-btn>
         </div>
     </div>

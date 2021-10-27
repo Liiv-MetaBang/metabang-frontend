@@ -3,43 +3,47 @@
         <div class='chage-btn' @click='changeSize'>
             <i class="fas fa-chevron-up arrow"></i>
         </div>
-        <div class='maemul-content' style="background:yellow">
+        <div class='maemul-content' style="background:white">
             <v-dialog
                 v-model="dialog"
                 width="500"
                 >
                 <template v-slot:activator="{ on, attrs }">
                     <v-img 
+                        v-bind="attrs"
+                        v-on="on"
                         :src="maemul.thumbnail"
                         class="maemul-img"
                         @click="dialog=true"
                     ></v-img>
                 </template>
-                <v-carousel v-model="model" style="display: flex; justify-content: center; align-items: center;">
+                <v-carousel v-model="model" style="display: flex; justify-content: center; align-items: center; min-height: 50vh;">
                     <v-carousel-item
                     v-for="(url, i) in urls "
                     :key="i"
+                    style="width: 90vw;"
                     >
-                        <v-img :src="url" style="height: 100%"></v-img>
+                        <v-img :src="url" style="width: 100%"></v-img>
                     </v-carousel-item>
                 </v-carousel>   
                 </v-dialog>
             
             <div class='maemul-title'>
                 <h3 id="font">{{ maemul.house_name }}</h3>
+                <br>
                 <div id="font">전세 : {{ maemul.price/1000000 }}백만원</div>
-                <div id="font">면적 : {{ maemul.area }}㎡</div>
+                <div id="font">면적 : {{ maemul.area }}평</div>
             </div>
             <div class="maemul-detail">
                 <h2 id="font" style="color:black;text-align:center;margin-top:10px">{{ maemul.house_name }}</h2>
                 <div id="font" style="text-align:center">전세 : {{ maemul.price/1000000 }}(단위: 백만원)</div>
                 <div id="font" style="text-align:center">준공년도 : {{ maemul.build_date }}년</div>
-                <div id="font" style="text-align:center">면적 : {{ maemul.area }}㎡</div>
+                <div id="font" style="text-align:center">면적 : {{ maemul.area }}평</div>
                 <div id="font" style="text-align:center">위치 : {{ maemul.address }}</div><br>
                 <div id="font" style="text-align:center"> 
                     <button id="button" onclick="window.open('https://gather.town/app/kgN3L9h4CdERI4zk/test');">메타버스 입장</button> 
                     <router-link to='/reservation' id="font"><button id="button" >방문예약</button></router-link>
-                    <router-link to='/contract' id="font"><button id="button">계약하기</button></router-link>
+                    <router-link to='/contract' id="font"><button id="button" @click="contract">계약하기</button></router-link>
                 </div>
                 
                 
@@ -51,6 +55,7 @@
 
 <script>
 import { SwiperSlide } from 'vue-awesome-swiper'
+import { mapMutations } from 'vuex'
 // import 
 
 export default {
@@ -70,15 +75,20 @@ export default {
             dialog: false,
             model: 0,
             urls: [
-                "https://dkne.s3.ap-northeast-2.amazonaws.com/1.PNG",
-                "https://dkne.s3.ap-northeast-2.amazonaws.com/detail/d1.PNG",
-                "https://dkne.s3.ap-northeast-2.amazonaws.com/detail/d2.PNG",
-                "https://dkne.s3.ap-northeast-2.amazonaws.com/detail/d3.PNG", 
+                "https://dkne.s3.ap-northeast-2.amazonaws.com/detail/dd1.PNG",
+                "https://dkne.s3.ap-northeast-2.amazonaws.com/detail/dd2.PNG",
+                "https://dkne.s3.ap-northeast-2.amazonaws.com/detail/dd3.PNG",
             ],
           
         }
     },
     methods: {
+        ...mapMutations({
+            setMaemul: "setMaemul",
+        }),
+        contract() {
+            this.setMaemul(this.maemul)
+        },
         changeSize() {
             let swipers = document.querySelectorAll(".swiper-slide")
             let maemulList = document.querySelector("#maemul-list")
@@ -140,7 +150,7 @@ export default {
     width: 100%;
     display: flex;
     justify-content: center;
-    background:yellowgreen;
+    background:yellow;
 }
 .arrow {
     font-size: 1.4rem;
@@ -185,9 +195,9 @@ export default {
     overflow: scroll;
 }
 #button{
-    border:5px solid olive;
+    border:5px solid green;
     border-radius:50%;
-    background:olive;
+    background:green;
     margin:0 2%;
     font-size:small;
     color:white

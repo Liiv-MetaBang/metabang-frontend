@@ -1,8 +1,10 @@
 <template>
-  <div class="wrap components-page" style="background:#33691E;">
-    <div class="wrapB">
-      <div style="display: flex;">
-        <v-btn class="ma-2" outlined color="white" @click="$router.push('/')">
+  <div class="wrap components-page" style="background: #FFCC80">
+    <div class="wrapB"> 
+      <div style="display: flex; justify-content:center; align-items: center; "> 
+        <img src="../../../public/img/비비.png" style="width:50px;height:50px">
+        <v-btn class="ma-2" outlined color="white" @click="$router.push('/')"
+        style="font-family: 'NEXON Lv1 Gothic OTF';">
           필터
         </v-btn>
 
@@ -21,11 +23,12 @@
             </template>
 
             <v-card>
-              <v-card-title class="text-h5 grey lighten-2">
+              <v-card-title class="text-h6 orange lighten-2" style="font-family: 'NEXON Lv1 Gothic OTF' !important;">
                 {{ dialogTitle }}
               </v-card-title>
 
-              <v-card-text>
+              <v-card-text style="margin:5px 0;font-size:medium;font-family: 'NEXON Lv1 Gothic OTF'; ">
+                <br>
                 {{ dialogText }}
               </v-card-text>
 
@@ -34,10 +37,12 @@
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn
-                  color="primary"
+                  color="orange"
                   text
                   @click="dialog = false"
                   v-if="dialogExitVisibility"
+                  style="font-family: 'NEXON Lv1 Gothic OTF' !important" 
+
                 >
                   닫기
                 </v-btn>
@@ -57,6 +62,7 @@
         />
       </swiper>
     </div>
+    <BottomNavigation />
   </div>
 </template>
 
@@ -66,12 +72,14 @@ import userrest from "../../api/UserHttpCommon.js";
 import MaemulList from "../../components/main/MaemulList.vue";
 import { Swiper } from "vue-awesome-swiper";
 import "swiper/css/swiper.css";
+import BottomNavigation from "../../components/common/BottomNavigation";
 
 export default {
   name: "RealestateSearch",
   components: {
     MaemulList,
     Swiper,
+    BottomNavigation,
   },
   data() {
     return {
@@ -102,9 +110,13 @@ export default {
       dialogTitle: "AI가 결과를 도출하는 중입니다.",
       dialogText: "잠시만 기다려주세요.",
       dialogExitVisibility: false,
+
+      location: new Map(),
     };
   },
   mounted() {
+    this.setLocation();
+
     if (window.kakao && window.kakao.maps) {
       this.initMap();
     } else {
@@ -116,6 +128,16 @@ export default {
     }
   },
   methods: {
+    setLocation() {
+      this.location.set("신길동", {
+        lat: 37.49721718198739,
+        lng: 126.9158540688247,
+      });
+      this.location.set("당산동", {
+        lat: 37.53273457121389,
+        lng: 126.90124980812696,
+      });
+    },
     fetchList() {
       this.setFilterCondition();
 
@@ -146,7 +168,10 @@ export default {
     initMap() {
       const container = document.getElementById("map");
       const options = {
-        center: new kakao.maps.LatLng(37.49721718198739, 126.9158540688247),
+        center: new kakao.maps.LatLng(
+          this.location.get("신길동").lat,
+          this.location.get("신길동").lng
+        ),
         level: 5,
       };
       this.map = new kakao.maps.Map(container, options);
@@ -216,13 +241,11 @@ export default {
       console.log(filterList);
     },
     setUserInfo() {
-      this.userInfo.age = 22;
-      this.userInfo.gender = 0;
-      this.userInfo.reason = 4;
+      this.userInfo.age = this.user.age;
+      this.userInfo.gender = this.user.gender;
+      this.userInfo.reason = this.user.reason;
     },
     recommendDongBasedAI() {
-      console.log("recommend");
-
       this.setUserInfo();
 
       userrest
@@ -242,15 +265,18 @@ export default {
             "입니다. 지도를 통해 매물을 둘러볼 수 있습니다.";
           this.dialogExitVisibility = true;
 
-          this.moveMapCenter();
+          this.moveMapCenter(res.data);
         })
         .catch(() => {
           // 통신 실패
           console.log("통신 실패");
         });
     },
-    moveMapCenter() {
-      var moveLatLon = new kakao.maps.LatLng(37.53273457121389, 126.90124980812696);
+    moveMapCenter(dong) {
+      var moveLatLon = new kakao.maps.LatLng(
+        this.location.get(dong).lat,
+        this.location.get(dong).lng
+      );
 
       // 지도 중심을 이동
       this.map.setCenter(moveLatLon);
@@ -268,6 +294,9 @@ export default {
     },
     maxprice() {
       return this.$store.state.filtering.maxprice;
+    },
+    user() {
+      return this.$store.state.user;
     },
   },
 };
@@ -290,11 +319,12 @@ export default {
   max-width: 540px;
   height: 25vh;
   position: fixed;
-  bottom: 10px;
+  bottom: 50px;
   margin: 0 auto;
   left: 0;
   right: 0;
   transition: all 300ms;
+  background:#FFCC80;
 }
 @font-face {
   font-family: "NEXON Lv1 Gothic OTF";
@@ -305,5 +335,8 @@ export default {
 }
 .components-page {
   padding-top: 0px !important;
+}
+.v-btn__content{
+  font-family: "NEXON Lv1 Gothic OTF" !important; 
 }
 </style>

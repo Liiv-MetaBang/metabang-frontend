@@ -15,7 +15,7 @@
                     size="30px"
                 >mdi-account-circle
                 </v-icon>
-                <span v-if="dialog" style="font-size:12px; font-family: 'NEXON Lv1 Gothic OTF'">매물검색</span>
+                <span style="font-size:12px; font-family: 'NEXON Lv1 Gothic OTF'">프로필</span>
             </div>
         </template>
 
@@ -78,13 +78,13 @@
                                 solo
                                 hide-details="true"
                                 :label=reasons[user.reason]
-                                @change="setReason($event)"
+                                @change="changeReason($event)"
                                 style="width: 70%; height: 70%; margin-left:auto;"
                             ></v-select>
                         </div>
                     </div>
                 </div>
-                <v-btn color="#FFCC00" @click="dialog=false" width="80%" style="position: absolute; bottom: 20px;">확 인</v-btn>
+                <v-btn color="#FFCC00" @click="profileOkBtn" width="80%" style="position: absolute; bottom: 20px;">확 인</v-btn>
             </v-card-text>
         </v-card>
         </v-dialog>
@@ -92,6 +92,8 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 export default {
     name: "Profile",
     components: {
@@ -131,21 +133,32 @@ export default {
         }
     },
     methods: {
+        ...mapMutations({
+            setUser: "setUser",
+            setReason: "setReason",
+        }),
         changeProfile() {
-            if (this.profile) {
-                this.$store.state.user = this.woman
-            } else {
-                this.$store.state.user = this.man
-            }
             this.profile = !this.profile
+            if (!this.profile) {
+                this.setUser(this.woman)
+            } else {
+                this.setUser(this.man)
+            }
         },
-        setReason(event) {
+        changeReason(event) {
             if (this.profile) {
                 this.man.reason = this.reasons.indexOf(event)
             } else {
                 this.woman.reason = this.reasons.indexOf(event)
             }
-            this.$store.state.user.reason = this.reasons.indexOf(event)
+        },
+        profileOkBtn() {
+            this.dialog=false
+            if (!this.profile) {
+                this.setUser(this.woman)
+            } else {
+                this.setUser(this.man)
+            }
         }
     }
 

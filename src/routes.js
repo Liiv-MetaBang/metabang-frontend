@@ -11,6 +11,7 @@ import Procedure from "./views/deal/Procedure.vue"
 import Remit from "./views/deal/Remit.vue"
 import RemitComplete from "./views/deal/RemitComplete.vue"
 import Contract from './views/contract/Contract.vue'
+import Confirm from './views/contract/Confirm.vue'
 import Main from './views/realestate/Main.vue'
 
 export default [
@@ -80,5 +81,10 @@ export default [
         path: '/contract',
         name:'Contract',
         component: Contract
+    },
+    {
+        path: '/confirm',
+        name:'Confirm',
+        component: Confirm
     }
 ]

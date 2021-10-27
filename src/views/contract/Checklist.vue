@@ -2,7 +2,13 @@
   <div class="wrap components-page">
     <div class="wrap">
       <h1
-        style="background:yellowgreen; height:60px; display: flex; justify-content: center; align-items: center;"
+        style="
+          background: yellowgreen;
+          height: 60px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        "
       >
         계약 체크리스트 📃
       </h1>
@@ -10,11 +16,12 @@
     </div>
 
     <div class="wrapB">
-      <div style="text-align:center">
+      <div style="text-align: center">
         <img src="../../../public/img/키키.png" />
       </div>
       <v-list subheader three-line>
-        <v-subheader style="font-size:18px;font-family:'NEXON Lv1 Gothic OTF'"
+        <v-subheader
+          style="font-size: 18px; font-family: 'NEXON Lv1 Gothic OTF'"
           >{{ name }}님 <br />계약전에 체크리스트를 꼭 확인하세요!</v-subheader
         >
       </v-list>
@@ -22,48 +29,60 @@
       <v-divider></v-divider>
 
       <v-list flat subheader three-line>
-        <v-list-item-group v-model="settings" multiple active-class="">
+        <v-list-item-group multiple active-class="">
           <v-list-item>
             <template v-slot:default="{ active }">
-              <v-list-item-action>
-                <v-checkbox :input-value="active"></v-checkbox>
+              <v-list-item-action @click="changeSkill(0)">
+                <v-checkbox
+                  :input-value="active"
+                  v-model="checkbox[0]"
+                ></v-checkbox>
+              </v-list-item-action>
+
+              <v-list-item-content>
+                <v-list-item-title>매물</v-list-item-title>
+                <v-list-item-subtitle
+                  >방 둘러보고 매물의 등기부등본을 확인해보기!</v-list-item-subtitle
+                >
+              </v-list-item-content>
+            </template>
+          </v-list-item>
+
+          <v-list-item>
+            <template v-slot:default="{ active }">
+              <v-list-item-action @click="changeSkill(1)">
+                <v-checkbox
+                  :input-value="active"
+                  v-model="checkbox[1]"
+                ></v-checkbox>
               </v-list-item-action>
 
               <v-list-item-content>
                 <v-list-item-title>대출</v-list-item-title>
                 <v-list-item-subtitle
-                  >월/전세 자금 대출이 가능한 집인지 체크!</v-list-item-subtitle
+                  >
+                  거래시 대출 필요 여부를 결정하고
+                  월/전세 자금 대출이 가능한 집인지 체크하기!</v-list-item-subtitle
                 >
+                <span style="color:red" @click="gotoLoan">혹시 대출이 필요하신가요?</span>
               </v-list-item-content>
             </template>
           </v-list-item>
 
           <v-list-item>
             <template v-slot:default="{ active }">
-              <v-list-item-action>
-                <v-checkbox :input-value="active"></v-checkbox>
-              </v-list-item-action>
-
-              <v-list-item-content>
-                <v-list-item-title>권리</v-list-item-title>
-                <v-list-item-subtitle
-                  >등기부등본을 확인해보기!</v-list-item-subtitle
-                >
-              </v-list-item-content>
-            </template>
-          </v-list-item>
-
-          <v-list-item>
-            <template v-slot:default="{ active }">
-              <v-list-item-action>
-                <v-checkbox :input-value="active"></v-checkbox>
+              <v-list-item-action @click="changeSkill(2)">
+                <v-checkbox
+                  :input-value="active"
+                  v-model="checkbox[2]"
+                ></v-checkbox>
               </v-list-item-action>
 
               <v-list-item-content>
                 <v-list-item-title>본인 확인</v-list-item-title>
                 <v-list-item-subtitle
-                  >계약시 본인/대리인인지 확인하고 대리인이면 위임장과
-                  인감증명서 체크하기!</v-list-item-subtitle
+                  >계약시 본인 인증하고 모두가 본인인지 확인하기!
+                </v-list-item-subtitle
                 >
               </v-list-item-content>
             </template>
@@ -71,14 +90,17 @@
 
           <v-list-item>
             <template v-slot:default="{ active }">
-              <v-list-item-action>
-                <v-checkbox :input-value="active"></v-checkbox>
+              <v-list-item-action @click="changeSkill(3)">
+                <v-checkbox
+                  :input-value="active"
+                  v-model="checkbox[3]"
+                ></v-checkbox>
               </v-list-item-action>
 
               <v-list-item-content>
-                <v-list-item-title>사항</v-list-item-title>
+                <v-list-item-title>계약서</v-list-item-title>
                 <v-list-item-subtitle
-                  >계약서 내용에 특약사항, 협의사항
+                  >계약서 작성하면서 특약사항, 협의사항
                   확인하기!</v-list-item-subtitle
                 >
               </v-list-item-content>
@@ -87,8 +109,11 @@
 
           <v-list-item>
             <template v-slot:default="{ active }">
-              <v-list-item-action>
-                <v-checkbox :input-value="active"></v-checkbox>
+              <v-list-item-action @click="changeSkill(4)">
+                <v-checkbox
+                  :input-value="active"
+                  v-model="checkbox[4]"
+                ></v-checkbox>
               </v-list-item-action>
 
               <v-list-item-content>
@@ -103,13 +128,18 @@
       </v-list>
       <v-progress-linear v-model="skill" color="yellow" height="25">
         <template v-slot:default="{ value }">
-          <strong style="font-family:'NEXON Lv1 Gothic OTF'"
+          <strong style="font-family: 'NEXON Lv1 Gothic OTF'"
             >{{ Math.ceil(value) }}%</strong
           >
         </template>
       </v-progress-linear>
     </div>
 
+    <div v-if="skill===100" style="display:flex; justify-content:center;flex-direction:column;align-items:center">
+       <h2 style="font-family: 'NEXON Lv1 Gothic OTF';color:red;text-align:center"> 축하합니다~ 체크리스트 100% 달성!</h2>
+      <img src="../../../public/img/콜리.png" style="width:150px;height:auto"  ><br>
+      <button id="complete" @click="gotoConfirm"> 계약 내용 확인 </button>
+    </div>
     <BottomNavigation />
   </div>
 </template>
@@ -122,17 +152,33 @@ export default {
   components: {
     BottomNavigation,
   },
+  methods: {
+    changeSkill(index) {
+      console.log(this.checkbox)
+      if (this.checkbox[index]) {
+        this.skill += 20;
+      } else {
+        this.skill -= 20;
+      }
+    },
+    gotoConfirm(){
+      this.$router.push(`/confirm`)
+    },
+    gotoLoan(){
+      this.$router.push(`/loan`)
+    },
+  },
   data: () => {
     return {
-      settings: [],
-      skill: 50,
+      skill: 0,
+      checkbox: [false, false, false, false, false],
     };
   },
-  computed:{
+  computed: {
     name() {
-      return this.$store.state.user.user_name
+      return this.$store.state.user.user_name;
     },
-  }
+  },
 };
 </script>
 
@@ -155,5 +201,13 @@ export default {
 
 .v-responsive__content {
   width: 100px;
+}
+
+#complete{
+  background:orange;
+  color:white;
+  font-family: "NEXON Lv1 Gothic OTF";
+  font-size:large;
+  padding:2%;
 }
 </style>

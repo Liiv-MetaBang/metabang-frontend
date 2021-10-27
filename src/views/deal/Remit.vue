@@ -28,7 +28,7 @@
                     <div class="amount-text">{{ amount }}원</div>
                 </div>
                 <v-img class='remit-sendImg' src="../../assets/images/receive-amount.png"></v-img>
-                <v-card class="remit-card">
+                <v-card class="remit-card" style="margin:0">
                     <div class='lessor'>
                         <v-img class='remit-character' src="../../assets/images/characters/콜리1.png"></v-img>
                         <div class='lessor-text'>
@@ -56,6 +56,8 @@
 
 
 <script>
+import { mapMutations } from 'vuex';
+
 export default {
     name: "Remit",
     components: {
@@ -76,9 +78,12 @@ export default {
             const minute = ('0' + today.getMinutes()).slice(-2);
 
             const dateString = `${year}년 ${month}월 ${day}일 ${hour}:${minute}`
-            this.$store.state.today = dateString
+            this.setDate(dateString)
             this.$router.push('/remit/complete')
-        }
+        },
+        ...mapMutations({
+            setDate: "setDate"
+        })
     },
     mounted() {
     },
@@ -98,6 +103,14 @@ export default {
 
 <style>
 
+@font-face {
+  font-family: "NEXON Lv1 Gothic OTF";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
 #remit {
     height: 100vh;
 }
@@ -111,7 +124,8 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: gainsboro;
+    background-color: yellowgreen;
+    font-family: "NEXON Lv1 Gothic OTF" !important;
 }
 #remit .content {
     height: 92vh;
