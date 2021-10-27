@@ -34,12 +34,13 @@
             </v-card-title>
             <v-img src="../../../public/img/계약서.jpeg"></v-img>
             <DrawingCanvas/>
+            <br><br>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="green darken-1" text @click="dialog = false" >
+              <v-btn color="white darken-1" style="background:navy" text @click="dialog = false" >
                 확인
               </v-btn>
-              <v-btn color="red darken-1" text @click="dialog = false">
+              <v-btn color="white darken-1" style="background:red" text @click="dialog = false">
                 취소
               </v-btn>
             </v-card-actions>

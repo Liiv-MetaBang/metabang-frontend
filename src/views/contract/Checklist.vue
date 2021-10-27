@@ -132,6 +132,11 @@
       </v-progress-linear>
     </div>
 
+    <br><br>
+    <div v-if="skill===100" style="display:flex; justify-content:center;flex-direction:column;align-items:center">
+      <img src="../../../public/img/콜리.png" style="width:150px;height:auto"  >
+      <h2 style="font-family: 'NEXON Lv1 Gothic OTF';color:red;text-align:center"> 축하합니다! 체크리스트 100% 달성!</h2>
+    </div>
     <BottomNavigation />
   </div>
 </template>
