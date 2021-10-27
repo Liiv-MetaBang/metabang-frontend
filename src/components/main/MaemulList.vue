@@ -30,14 +30,15 @@
             
             <div class='maemul-title'>
                 <h3 id="font">{{ maemul.house_name }}</h3>
+                <br>
                 <div id="font">전세 : {{ maemul.price/1000000 }}백만원</div>
-                <div id="font">면적 : {{ maemul.area }}㎡</div>
+                <div id="font">면적 : {{ maemul.area }}평</div>
             </div>
             <div class="maemul-detail">
                 <h2 id="font" style="color:black;text-align:center;margin-top:10px">{{ maemul.house_name }}</h2>
                 <div id="font" style="text-align:center">전세 : {{ maemul.price/1000000 }}(단위: 백만원)</div>
                 <div id="font" style="text-align:center">준공년도 : {{ maemul.build_date }}년</div>
-                <div id="font" style="text-align:center">면적 : {{ maemul.area }}㎡</div>
+                <div id="font" style="text-align:center">면적 : {{ maemul.area }}평</div>
                 <div id="font" style="text-align:center">위치 : {{ maemul.address }}</div><br>
                 <div id="font" style="text-align:center"> 
                     <button id="button" onclick="window.open('https://gather.town/app/kgN3L9h4CdERI4zk/test');">메타버스 입장</button> 

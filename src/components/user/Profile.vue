@@ -1,20 +1,22 @@
 <template>
-    <div class="text-center">
+    <div class="text-center" style='margin: auto 0;'>
+        
         <v-dialog
         v-model="dialog"
         max-width="500px"
         width="90vw"
         >
         <template v-slot:activator="{ on, attrs }">
-            <v-img
-                color="indigo"
-                max-width="40px"
-                v-bind="attrs"
-                v-on="on"
-                type='button'
-                src="../../assets/images/profile/profile.png"
-            >
-            </v-img>
+            <div style="display: flex; flex-direction: column;">
+                <v-icon
+                    style="padding:0 16px"
+                    v-bind="attrs"
+                    v-on="on"
+                    size="30px"
+                >mdi-account-circle
+                </v-icon>
+                <span v-if="dialog" style="font-size:12px; font-family: 'NEXON Lv1 Gothic OTF'">매물검색</span>
+            </div>
         </template>
 
         <v-card class='profile-modal'> 
@@ -26,7 +28,7 @@
                     <v-img v-if="profile" src="../../assets/images/profile/man.png"></v-img>
                     <v-img v-else src="../../assets/images/profile/woman.png"></v-img>
                 </v-avatar>
-                <h3 style="color: #645B4C">{{ user.user_name }}</h3>
+                <h3 style="color: #645B4C; font-family: 'NEXON Lv1 Gothic OTF'">{{ user.user_name }}</h3>
             </v-card-title>
 
             <v-card-text class="profile-content">
@@ -163,15 +165,23 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+@font-face {
+  font-family: "NEXON Lv1 Gothic OTF";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
 .profile-modal {
     max-width: 500px;
     width: 90vw;
-    height: 77vh;
+    height: 80vh;
 }
 .profile-title {
     background-color: #FFCC00;
-    height: 25vh;   
+    height: 28vh;   
     display: flex;
     justify-content: center;
     flex-direction: column;
