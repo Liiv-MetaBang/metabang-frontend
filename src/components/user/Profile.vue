@@ -140,7 +140,11 @@ export default {
             this.profile = !this.profile
         },
         setReason(event) {
-            
+            if (this.profile) {
+                this.man.reason = this.reasons.indexOf(event)
+            } else {
+                this.woman.reason = this.reasons.indexOf(event)
+            }
             this.$store.state.user.reason = this.reasons.indexOf(event)
         }
     }

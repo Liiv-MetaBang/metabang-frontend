@@ -1,7 +1,7 @@
 <template>
-  <div class="wrap components-page" style="background:#33691E;">
+  <div class="wrap components-page" style="background: #33691e">
     <div class="wrapB">
-      <div style="display: flex;">
+      <div style="display: flex">
         <v-btn class="ma-2" outlined color="white" @click="$router.push('/')">
           필터
         </v-btn>
@@ -102,9 +102,13 @@ export default {
       dialogTitle: "AI가 결과를 도출하는 중입니다.",
       dialogText: "잠시만 기다려주세요.",
       dialogExitVisibility: false,
+
+      location: new Map(),
     };
   },
   mounted() {
+    this.setLocation();
+
     if (window.kakao && window.kakao.maps) {
       this.initMap();
     } else {
@@ -116,6 +120,16 @@ export default {
     }
   },
   methods: {
+    setLocation() {
+      this.location.set("신길동", {
+        lat: 37.49721718198739,
+        lng: 126.9158540688247,
+      });
+      this.location.set("당산동", {
+        lat: 37.53273457121389,
+        lng: 126.90124980812696,
+      });
+    },
     fetchList() {
       this.setFilterCondition();
 
@@ -146,7 +160,10 @@ export default {
     initMap() {
       const container = document.getElementById("map");
       const options = {
-        center: new kakao.maps.LatLng(37.49721718198739, 126.9158540688247),
+        center: new kakao.maps.LatLng(
+          this.location.get("신길동").lat,
+          this.location.get("신길동").lng
+        ),
         level: 5,
       };
       this.map = new kakao.maps.Map(container, options);
@@ -216,13 +233,11 @@ export default {
       console.log(filterList);
     },
     setUserInfo() {
-      this.userInfo.age = 22;
-      this.userInfo.gender = 0;
-      this.userInfo.reason = 4;
+      this.userInfo.age = this.user.age;
+      this.userInfo.gender = this.user.gender;
+      this.userInfo.reason = this.user.reason;
     },
     recommendDongBasedAI() {
-      console.log("recommend");
-
       this.setUserInfo();
 
       userrest
@@ -242,15 +257,18 @@ export default {
             "입니다. 지도를 통해 매물을 둘러볼 수 있습니다.";
           this.dialogExitVisibility = true;
 
-          this.moveMapCenter();
+          this.moveMapCenter(res.data);
         })
         .catch(() => {
           // 통신 실패
           console.log("통신 실패");
         });
     },
-    moveMapCenter() {
-      var moveLatLon = new kakao.maps.LatLng(37.53273457121389, 126.90124980812696);
+    moveMapCenter(dong) {
+      var moveLatLon = new kakao.maps.LatLng(
+        this.location.get(dong).lat,
+        this.location.get(dong).lng
+      );
 
       // 지도 중심을 이동
       this.map.setCenter(moveLatLon);
@@ -268,6 +286,9 @@ export default {
     },
     maxprice() {
       return this.$store.state.filtering.maxprice;
+    },
+    user() {
+      return this.$store.state.user;
     },
   },
 };
