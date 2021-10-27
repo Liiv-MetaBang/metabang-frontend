@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import getters from './getters'
-import actions from './actions'
-import mutations from './mutations'
+// import getters from './getters'
+// import actions from './actions'
+// import mutations from './mutations'
+import createPersistedState from 'vuex-persistedstate';
 
 Vue.use(Vuex)
 
@@ -35,9 +36,40 @@ const state = {
     }
 }
 
+const mutations = {
+    setAmount(state, amount) {
+        state.amount = amount
+    },
+    setSign(state, sign) {
+        state.user.sign = sign
+    },
+    setUser(state, user) {
+        state.user = user
+    },
+    setDate(state, today) {
+        state.today = today
+    },
+    setFiltering(state, filtering) {
+        state.filtering = filtering
+    },
+}
+
+const getters = {
+    
+}
+
+const actions = {
+    
+}
+
 export default new Vuex.Store({
     state,
     mutations,
     getters,
-    actions
+    actions,
+    plugins: [
+        createPersistedState({
+            storage: window.sessionStorage,
+        }),
+    ],
 })

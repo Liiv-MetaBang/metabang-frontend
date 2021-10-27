@@ -10,17 +10,20 @@
                 >
                 <template v-slot:activator="{ on, attrs }">
                     <v-img 
+                        v-bind="attrs"
+                        v-on="on"
                         :src="maemul.thumbnail"
                         class="maemul-img"
                         @click="dialog=true"
                     ></v-img>
                 </template>
-                <v-carousel v-model="model" style="display: flex; justify-content: center; align-items: center;">
+                <v-carousel v-model="model" style="display: flex; justify-content: center; align-items: center; min-height: 50vh;">
                     <v-carousel-item
                     v-for="(url, i) in urls "
                     :key="i"
+                    style="width: 90vw;"
                     >
-                        <v-img :src="url" style="height: 100%"></v-img>
+                        <v-img :src="url" style="width: 100%"></v-img>
                     </v-carousel-item>
                 </v-carousel>   
                 </v-dialog>
@@ -70,10 +73,9 @@ export default {
             dialog: false,
             model: 0,
             urls: [
-                "https://dkne.s3.ap-northeast-2.amazonaws.com/1.PNG",
-                "https://dkne.s3.ap-northeast-2.amazonaws.com/detail/d1.PNG",
-                "https://dkne.s3.ap-northeast-2.amazonaws.com/detail/d2.PNG",
-                "https://dkne.s3.ap-northeast-2.amazonaws.com/detail/d3.PNG", 
+                "https://dkne.s3.ap-northeast-2.amazonaws.com/detail/dd1.PNG",
+                "https://dkne.s3.ap-northeast-2.amazonaws.com/detail/dd2.PNG",
+                "https://dkne.s3.ap-northeast-2.amazonaws.com/detail/dd3.PNG",
             ],
           
         }

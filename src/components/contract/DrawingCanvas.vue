@@ -33,6 +33,7 @@
 
 <script>
 import VueDrawingCanvas from 'vue-drawing-canvas';
+import { mapMutations } from "vuex";
 
 export default {
     components: {
@@ -56,12 +57,15 @@ export default {
         },
         save() {
             var canvas = document.querySelector('.canvas')
-            this.$store.state.user.sign = canvas.toDataURL()
+            this.setSign(canvas.toDataURL())
             if (this.disabled) {
                 this.$refs.VueCanvasDrawing.reset()
             }
             this.disabled = !this.disabled
-        }
+        },
+        ...mapMutations({
+            setSign: "setSign"
+        })
     }
 }
 </script>
