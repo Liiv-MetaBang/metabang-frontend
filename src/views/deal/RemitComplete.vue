@@ -6,11 +6,11 @@
             </div>
             <div class="content">
                 <v-img class="complete-img" src="../../assets/images/characters/비비2.png"></v-img>
-                <div class="complete-text">
-                    <div class="complete-text-amount">{{ amount }}원</div>
+                <div class="complete-text" style="font-family: NEXON Lv1 Gothic OTF' !important;">
+                    <div class="complete-text-amount" >{{ amount }}원</div>
                     <h3>송금 완료</h3>
                 </div>
-                <div class="complete-box">
+                <div class="complete-box" style="font-family: NEXON Lv1 Gothic OTF' !important;">
                     <div class="complete-lessor">
                         <div class='complete-lessor-title'>
                             받는 사람
@@ -27,7 +27,7 @@
                             {{ today }}
                         </div>
                     </div>
-                    <v-btn color="#FFCC00" class="complete-btn">확인</v-btn>
+                    <v-btn color="#FFCC00" class="complete-btn" @click="gotoChecklist">확인</v-btn>
                 </div>
             </div>
         </div>
@@ -49,11 +49,24 @@ export default {
         today() {
             return this.$store.state.today
         }
+    },
+    methods:{
+        gotoChecklist(){
+            this.$router.push(`/checklist`)
+        }
     }
 }
 </script>
 
 <style>
+@font-face {
+  font-family: "NEXON Lv1 Gothic OTF";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
 #remit-complete {
     height: 100vh;
 }
@@ -66,7 +79,8 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: gainsboro;
+    background-color: yellowgreen;
+    font-family: "NEXON Lv1 Gothic OTF" !important;
 }
 #remit-complete .content {
     height: 92vh;
@@ -91,6 +105,7 @@ export default {
     margin-top: 3vh;
     color: gray;
     font-size: 1.5rem;
+    font-family: "NEXON Lv1 Gothic OTF" !important;
 }
 .complete-box {
     margin-top: 18vh;
