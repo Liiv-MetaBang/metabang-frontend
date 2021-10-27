@@ -1,8 +1,10 @@
 <template>
-  <div class="wrap components-page" style="background: #33691e">
-    <div class="wrapB">
-      <div style="display: flex">
-        <v-btn class="ma-2" outlined color="white" @click="$router.push('/')">
+  <div class="wrap components-page" style="background: #009688">
+    <div class="wrapB"> 
+      <div style="display: flex; justify-content:center; align-items: center; "> 
+        <img src="../../../public/img/비비.png" style="width:50px;height:50px">
+        <v-btn class="ma-2" outlined color="white" @click="$router.push('/')"
+        style="font-family: 'NEXON Lv1 Gothic OTF';">
           필터
         </v-btn>
 
@@ -21,11 +23,12 @@
             </template>
 
             <v-card>
-              <v-card-title class="text-h5 grey lighten-2">
+              <v-card-title class="text-h6 orange lighten-2" style="font-family: 'NEXON Lv1 Gothic OTF' !important;">
                 {{ dialogTitle }}
               </v-card-title>
 
-              <v-card-text>
+              <v-card-text style="margin:5px 0;font-size:medium;font-family: 'NEXON Lv1 Gothic OTF'; ">
+                <br>
                 {{ dialogText }}
               </v-card-text>
 
@@ -34,10 +37,12 @@
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn
-                  color="primary"
+                  color="orange"
                   text
                   @click="dialog = false"
                   v-if="dialogExitVisibility"
+                  style="font-family: 'NEXON Lv1 Gothic OTF' !important" 
+
                 >
                   닫기
                 </v-btn>
@@ -57,6 +62,7 @@
         />
       </swiper>
     </div>
+    <BottomNavigation />
   </div>
 </template>
 
@@ -66,12 +72,14 @@ import userrest from "../../api/UserHttpCommon.js";
 import MaemulList from "../../components/main/MaemulList.vue";
 import { Swiper } from "vue-awesome-swiper";
 import "swiper/css/swiper.css";
+import BottomNavigation from "../../components/common/BottomNavigation";
 
 export default {
   name: "RealestateSearch",
   components: {
     MaemulList,
     Swiper,
+    BottomNavigation,
   },
   data() {
     return {
@@ -311,11 +319,12 @@ export default {
   max-width: 540px;
   height: 25vh;
   position: fixed;
-  bottom: 10px;
+  bottom: 50px;
   margin: 0 auto;
   left: 0;
   right: 0;
   transition: all 300ms;
+  background:#009688;
 }
 @font-face {
   font-family: "NEXON Lv1 Gothic OTF";
@@ -326,5 +335,8 @@ export default {
 }
 .components-page {
   padding-top: 0px !important;
+}
+.v-btn__content{
+  font-family: "NEXON Lv1 Gothic OTF" !important; 
 }
 </style>

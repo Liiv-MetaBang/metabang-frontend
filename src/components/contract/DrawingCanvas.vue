@@ -2,14 +2,14 @@
     <div class="drawing">
         <div class='sign'>
             <div>
-                <span>임차인</span>
+                <span style="font-family: 'NEXON Lv1 Gothic OTF';">임차인</span>
 
                 <v-img class="lessor-sign" :src="lessor.sign">
                 </v-img>
                 
             </div>
             <div>
-                <span>임대인</span>
+                <span style="font-family: 'NEXON Lv1 Gothic OTF';">임대인</span>
                 <vue-drawing-canvas
                     ref="VueCanvasDrawing"
                     class='canvas'
@@ -67,6 +67,13 @@ export default {
 </script>
 
 <style>
+@font-face {
+  font-family: "NEXON Lv1 Gothic OTF";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
 .drawing {
     display: block;
     width: 330px;
