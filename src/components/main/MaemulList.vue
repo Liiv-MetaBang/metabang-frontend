@@ -3,7 +3,7 @@
         <div class='chage-btn' @click='changeSize'>
             <i class="fas fa-chevron-up arrow"></i>
         </div>
-        <div class='maemul-content' style="background:yellow">
+        <div class='maemul-content' style="background:white">
             <v-dialog
                 v-model="dialog"
                 width="500"
@@ -150,7 +150,7 @@ export default {
     width: 100%;
     display: flex;
     justify-content: center;
-    background:yellowgreen;
+    background:yellow;
 }
 .arrow {
     font-size: 1.4rem;
@@ -195,9 +195,9 @@ export default {
     overflow: scroll;
 }
 #button{
-    border:5px solid olive;
+    border:5px solid green;
     border-radius:50%;
-    background:olive;
+    background:green;
     margin:0 2%;
     font-size:small;
     color:white
