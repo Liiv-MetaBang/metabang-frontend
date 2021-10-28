@@ -42,7 +42,8 @@
               <v-list-item-content>
                 <v-list-item-title>매물</v-list-item-title>
                 <v-list-item-subtitle
-                  >방 둘러보고 매물의 등기부등본을 확인해보기!</v-list-item-subtitle
+                  >방 둘러보고 매물의 등기부등본을
+                  확인해보기!</v-list-item-subtitle
                 >
               </v-list-item-content>
             </template>
@@ -59,12 +60,13 @@
 
               <v-list-item-content>
                 <v-list-item-title>대출</v-list-item-title>
-                <v-list-item-subtitle
-                  >
-                  거래시 대출 필요 여부를 결정하고
-                  월/전세 자금 대출이 가능한 집인지 체크하기!</v-list-item-subtitle
+                <v-list-item-subtitle>
+                  거래시 대출 필요 여부를 결정하고 월/전세 자금 대출이 가능한
+                  집인지 체크하기!</v-list-item-subtitle
                 >
-                <span style="color:red" @click="gotoLoan">혹시 대출이 필요하신가요?</span>
+                <span style="color:red" @click="gotoLoan"
+                  >혹시 대출이 필요하신가요?</span
+                >
               </v-list-item-content>
             </template>
           </v-list-item>
@@ -82,8 +84,7 @@
                 <v-list-item-title>본인 확인</v-list-item-title>
                 <v-list-item-subtitle
                   >계약시 본인 인증하고 모두가 본인인지 확인하기!
-                </v-list-item-subtitle
-                >
+                </v-list-item-subtitle>
               </v-list-item-content>
             </template>
           </v-list-item>
@@ -135,10 +136,20 @@
       </v-progress-linear>
     </div>
 
-    <div v-if="skill===100" style="display:flex; justify-content:center;flex-direction:column;align-items:center">
-       <h2 style="font-family: 'NEXON Lv1 Gothic OTF';color:red;text-align:center"> 축하합니다~ 체크리스트 100% 달성!</h2>
-      <img src="../../../public/img/콜리.png" style="width:150px;height:auto"  ><br>
-      <button id="complete" @click="gotoConfirm"> 계약 내용 확인 </button>
+    <div
+      v-if="skill === 100"
+      style="display:flex; justify-content:center;flex-direction:column;align-items:center"
+    >
+      <h2
+        style="font-family: 'NEXON Lv1 Gothic OTF';color:red;text-align:center"
+      >
+        축하합니다~ 체크리스트 100% 달성!
+      </h2>
+      <img
+        src="../../../public/img/콜리.png"
+        style="width:150px;height:auto"
+      /><br />
+      <button id="complete" @click="gotoConfirm">계약 내용 확인</button>
     </div>
     <BottomNavigation />
   </div>
@@ -154,18 +165,18 @@ export default {
   },
   methods: {
     changeSkill(index) {
-      console.log(this.checkbox)
+      console.log(this.checkbox);
       if (this.checkbox[index]) {
         this.skill += 20;
       } else {
         this.skill -= 20;
       }
     },
-    gotoConfirm(){
-      this.$router.push(`/confirm`)
+    gotoConfirm() {
+      this.$router.push(`/confirm`);
     },
-    gotoLoan(){
-      this.$router.push(`/loan`)
+    gotoLoan() {
+      this.$router.push(`/loan`);
     },
   },
   data: () => {
@@ -173,6 +184,19 @@ export default {
       skill: 0,
       checkbox: [false, false, false, false, false],
     };
+  },
+  created() {
+    //console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    //console.log(this.$route.params.loan_flag)
+    console.log("!!!!!!!!!!----------------")
+    console.log(this.$store.state.flag.loan_flag)
+    if (this.$store.state.flag.loan_flag) {
+      this.checkbox[1] = true;
+      this.skill += 20;
+    }
+  },
+  props: {
+    loan_flag: { type: Boolean, default: false },
   },
   computed: {
     name() {
@@ -203,11 +227,11 @@ export default {
   width: 100px;
 }
 
-#complete{
-  background:orange;
-  color:white;
+#complete {
+  background: orange;
+  color: white;
   font-family: "NEXON Lv1 Gothic OTF";
-  font-size:large;
-  padding:2%;
+  font-size: large;
+  padding: 2%;
 }
 </style>

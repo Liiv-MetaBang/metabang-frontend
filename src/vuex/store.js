@@ -49,6 +49,10 @@ const state = {
         certification: false,
         special: false,
         date: false,
+    },
+    flag:{
+        loan_flag:false,
+        mamul_flag:false
     }
 }
 
@@ -73,6 +77,13 @@ const mutations = {
     },
     setCheckList(state, checkList) {
         state.checkList = checkList
+    },
+    setLoanFlag(state, flag){
+        /* state.flag = {
+        loan_flag:false,
+        mamul_flag:false
+        }*/
+        state.flag.loan_flag=flag
     }
     // setRight(state, right) {
     //     state.maemul.right = right
