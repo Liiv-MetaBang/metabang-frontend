@@ -45,7 +45,8 @@ export default [
     {
         path: '/checklist',
         name: 'Checklist',
-        component: Checklist
+        component: Checklist,
+        props:true,
     },
     {
         path: '/test',
