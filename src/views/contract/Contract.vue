@@ -112,6 +112,7 @@ export default {
   methods: {
     gotoChecklist() {
       this.dialog = false;
+      this.$store.commit("setContractFlag",true);
       this.$router.push(`/checklist`);
     },
   },
@@ -120,9 +121,7 @@ export default {
       return this.$store.state.checkList.certification;
     },
   },
-  mounted() {
-    console.log(this.certification);
-  },
+  
 };
 </script>
 
