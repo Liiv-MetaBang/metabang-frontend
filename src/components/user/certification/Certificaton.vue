@@ -8,7 +8,7 @@
       </template>
 
       <v-card>
-        <v-card-title class="text-h5 grey lighten-2">
+        <v-card-title class="text-h5 lighten-2" style="background-color:yellow; font-family: 'NEXON Lv1 Gothic OTF' !important;">
           본인인증
         </v-card-title>
         <div v-if="certification">
@@ -113,7 +113,7 @@
                 ></v-text-field>
               </div>
             </div>
-            <v-btn color="primary" @click="certify" width="100%">
+            <v-btn color="orange" @click="certify" width="100%">
               인증 확인
             </v-btn>
           </v-card-text>
@@ -123,7 +123,7 @@
 
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="primary" text @click="close">
+          <v-btn color="black" text @click="close">
             확인
           </v-btn>
         </v-card-actions>
@@ -171,6 +171,7 @@ export default {
     certify() {
       if (this.id === this.certText) {
         this.$store.state.checkList.certification = true;
+        this.$store.commit("setMeFlag",true);
       } else {
         alert("인증 번호가 일치하지 않습니다.");
       }
@@ -242,6 +243,13 @@ export default {
 </script>
 
 <style>
+@font-face {
+  font-family: "NEXON Lv1 Gothic OTF";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
 .cert-text {
   margin: 10px 0;
 }
