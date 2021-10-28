@@ -188,15 +188,24 @@ export default {
   created() {
     //console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!")
     //console.log(this.$route.params.loan_flag)
-    console.log("!!!!!!!!!!----------------")
-    console.log(this.$store.state.flag.loan_flag)
+    //console.log("!!!!!!!!!!----------------")
+    //console.log(this.$store.state.flag.loan_flag)
     if (this.$store.state.flag.loan_flag) {
       this.checkbox[1] = true;
       this.skill += 20;
     }
+    if (this.$store.state.flag.me_flag){
+      this.checkbox[2]=true;
+      this.skill+=20;
+    }
+    if (this.$store.state.flag.contract_flag){
+      this.checkbox[3]=true;
+      this.skill+=20;
+    }
   },
   props: {
     loan_flag: { type: Boolean, default: false },
+    me_flag:{type:Boolean, default:false},
   },
   computed: {
     name() {
