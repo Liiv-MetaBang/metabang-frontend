@@ -18,13 +18,15 @@
                     ></v-img>
                 </template>
                 <v-carousel v-model="model" style="display: flex; justify-content: center; align-items: center; min-height: 50vh;">
-                    <v-carousel-item
-                    v-for="(url, i) in urls "
-                    :key="i"
-                    style="width: 90vw;"
-                    >
-                        <v-img :src="url" style="width: 100%"></v-img>
-                    </v-carousel-item>
+                        <v-carousel-item
+                        v-for="(url, i) in urls "
+                        :key="i"
+                        style="width: 90vw;"
+                        >
+                        <div style="height: 100%; display: flex; justify-content: center; align-items: center;">
+                            <v-img :src="url" style="width: 100%"></v-img>
+                        </div>
+                        </v-carousel-item>
                 </v-carousel>   
                 </v-dialog>
             
@@ -150,7 +152,7 @@ export default {
     width: 100%;
     display: flex;
     justify-content: center;
-    background:yellow;
+    background:#545045;
 }
 .arrow {
     font-size: 1.4rem;
@@ -195,9 +197,9 @@ export default {
     overflow: scroll;
 }
 #button{
-    border:5px solid green;
+    border:5px solid #545045;
     border-radius:50%;
-    background:green;
+    background:#545045;
     margin:0 2%;
     font-size:small;
     color:white

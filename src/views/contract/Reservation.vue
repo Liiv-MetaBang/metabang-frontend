@@ -197,7 +197,7 @@ export default {
     },
     confirm() {
       this.dialog = false;
-      this.$router.push(`/`);
+      this.$router.push(`/realestate/search`);
     },
   },
 };
