@@ -52,8 +52,7 @@ const state = {
     },
     flag:{
         loan_flag:false,
-        contract_flag:false,
-        me_flag:false,
+        mamul_flag:false
     }
 }
 
@@ -85,12 +84,6 @@ const mutations = {
         mamul_flag:false
         }*/
         state.flag.loan_flag=flag
-    },
-    setMeFlag(state,flag){
-        state.flag.me_flag=flag
-    },
-    setContractFlag(state, flag){
-        state.flag.contract_flag=flag
     }
     // setRight(state, right) {
     //     state.maemul.right = right
