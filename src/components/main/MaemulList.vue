@@ -164,7 +164,7 @@ export default {
     display: flex;
     font-weight: bold;
     background-color: white;
-    opacity: 0.9;
+    opacity: 1;
     background-position: center;
     background-size: cover;
     border-radius: 12px 12px 12px 12px / 12px 12px 12px 12px;
