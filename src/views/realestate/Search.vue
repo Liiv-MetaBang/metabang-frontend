@@ -1,10 +1,18 @@
 <template>
   <div class="wrap components-page" style="background: #FFCD05">
-    <div class="wrapB"> 
-      <div style="display: flex; justify-content:center; align-items: center; "> 
-        <img src="../../../public/img/비비.png" style="width:50px;height:50px">
-        <v-btn class="ma-2" outlined color="white" @click="$router.push('/')"
-        style="font-family: 'NEXON Lv1 Gothic OTF';">
+    <div class="wrapB">
+      <div style="display: flex; justify-content:center; align-items: center; ">
+        <img
+          src="../../../public/img/비비.png"
+          style="width:50px;height:50px"
+        />
+        <v-btn
+          class="ma-2"
+          outlined
+          color="white"
+          @click="$router.push('/')"
+          style="font-family: 'NEXON Lv1 Gothic OTF';"
+        >
           필터
         </v-btn>
 
@@ -23,12 +31,17 @@
             </template>
 
             <v-card>
-              <v-card-title class="text-h6 orange lighten-2" style="font-family: 'NEXON Lv1 Gothic OTF' !important;">
+              <v-card-title
+                class="text-h6 orange lighten-2"
+                style="font-family: 'NEXON Lv1 Gothic OTF' !important;"
+              >
                 {{ dialogTitle }}
               </v-card-title>
 
-              <v-card-text style="margin:5px 0;font-size:medium;font-family: 'NEXON Lv1 Gothic OTF'; ">
-                <br>
+              <v-card-text
+                style="margin:5px 0;font-size:medium;font-family: 'NEXON Lv1 Gothic OTF'; "
+              >
+                <br />
                 {{ dialogText }}
               </v-card-text>
 
@@ -41,8 +54,7 @@
                   text
                   @click="dialog = false"
                   v-if="dialogExitVisibility"
-                  style="font-family: 'NEXON Lv1 Gothic OTF' !important" 
-
+                  style="font-family: 'NEXON Lv1 Gothic OTF' !important"
                 >
                   닫기
                 </v-btn>
@@ -87,6 +99,7 @@ export default {
       realestates: null,
       filterConditions: {},
       userInfo: {},
+      lastUserName: "",
 
       maemuls: {},
       swiperOption: {
@@ -248,6 +261,12 @@ export default {
     recommendDongBasedAI() {
       this.setUserInfo();
 
+      if (this.userInfo.name != this.lastUserName) {
+        this.dialogTitle = "AI가 결과를 도출하는 중입니다.";
+        this.dialogText = "잠시만 기다려주세요.";
+        this.dialogExitVisibility = false;
+      }
+
       userrest
         .axios({
           url: "/recommand",
@@ -324,7 +343,7 @@ export default {
   left: 0;
   right: 0;
   transition: all 300ms;
-  background:#FFCD05;
+  background: #ffcd05;
 }
 @font-face {
   font-family: "NEXON Lv1 Gothic OTF";
@@ -336,7 +355,7 @@ export default {
 .components-page {
   padding-top: 0px !important;
 }
-.v-btn__content{
-  font-family: "NEXON Lv1 Gothic OTF" !important; 
+.v-btn__content {
+  font-family: "NEXON Lv1 Gothic OTF" !important;
 }
 </style>
