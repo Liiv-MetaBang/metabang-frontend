@@ -112,7 +112,7 @@ export default {
   methods: {
     gotoChecklist() {
       this.dialog = false;
-      this.$store.commit("setContractFlag",true);
+      this.$store.commit("setSpecial",true);
       this.$router.push(`/checklist`);
     },
   },
