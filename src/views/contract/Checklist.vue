@@ -165,11 +165,33 @@ export default {
   },
   methods: {
     changeSkill(index) {
-      console.log(this.checkbox);
       if (this.checkbox[index]) {
         this.skill += 20;
       } else {
         this.skill -= 20;
+      }
+
+      switch (index) {
+        case 0:
+          this.$store.state.checkList.loan = !this.checkList[index];
+          this.checkList[index] = this.$store.state.checkList.loan;
+          break;
+        case 1:
+          this.$store.state.checkList.right = !this.checkList[index];
+          this.checkList[index] = this.$store.state.checkList.right;
+          break;
+        case 2:
+          this.$store.state.checkList.certification = !this.checkList[index];
+          this.checkList[index] = this.$store.state.checkList.certification;
+          break;
+        case 3:
+          this.$store.state.checkList.special = !this.checkList[index];
+          this.checkList[index] = this.$store.state.checkList.special;
+          break;
+        case 4:
+          this.$store.state.checkList.date = !this.checkList[index];
+          this.checkList[index] = this.$store.state.checkList.date;
+          break;
       }
     },
     gotoConfirm() {
@@ -182,34 +204,34 @@ export default {
   data: () => {
     return {
       skill: 0,
-      checkbox: [false, false, false, false, false],
+      checkbox: [],
     };
   },
   created() {
-    //console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!")
-    //console.log(this.$route.params.loan_flag)
-    //console.log("!!!!!!!!!!----------------")
-    //console.log(this.$store.state.flag.loan_flag)
-    if (this.$store.state.flag.loan_flag) {
-      this.checkbox[1] = true;
-      this.skill += 20;
-    }
-    if (this.$store.state.flag.me_flag){
-      this.checkbox[2]=true;
-      this.skill+=20;
-    }
-    if (this.$store.state.flag.contract_flag){
-      this.checkbox[3]=true;
-      this.skill+=20;
+    this.checkbox = [
+      this.checkList.loan,
+      this.checkList.right,
+      this.checkList.certification,
+      this.checkList.special,
+      this.checkList.date,
+    ];
+
+    for (var i = 0; i < this.checkbox.length; i++) {
+      if (this.checkbox[i]) {
+        this.skill += 20;
+      }
     }
   },
   props: {
     loan_flag: { type: Boolean, default: false },
-    me_flag:{type:Boolean, default:false},
+    me_flag: { type: Boolean, default: false },
   },
   computed: {
     name() {
       return this.$store.state.user.user_name;
+    },
+    checkList() {
+      return this.$store.state.checkList;
     },
   },
 };
