@@ -56,6 +56,8 @@ export default {
     },
     methods: {
         reset() {
+            this.$refs.VueCanvasDrawing.reset()
+
         },
         save() {
             var canvas = document.querySelector('.canvas')
